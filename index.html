@@ -18,6 +18,7 @@
   --rule:rgba(26,23,20,.14); --rule-strong:rgba(26,23,20,.27);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%; text-size-adjust:100%;}
 html,body{height:100%; overflow:hidden;}
 body{font-family:'Inter',sans-serif; color:var(--ink); line-height:1.5; -webkit-font-smoothing:antialiased;
   background:var(--desk);}
@@ -47,7 +48,7 @@ a{color:inherit; text-decoration:none;}
 
 /* desk grid */
 .desk{flex:1 1 auto; display:grid; grid-template-columns:255px 1fr 300px; gap:20px; padding:6px 28px 4px; min-height:0;}
-.col{display:flex; flex-direction:column; gap:16px; min-height:0;}
+.col{display:flex; flex-direction:column; gap:16px; min-height:0; overflow-y:auto; overflow-x:hidden; scrollbar-width:thin;}
 .col-c{align-items:center; justify-content:center;}
 
 /* shared object = a sheet/drawing on the desk */
@@ -109,9 +110,53 @@ a{color:inherit; text-decoration:none;}
 .obj .o-title{font-family:'Fraunces',serif; font-size:1.05rem; color:var(--ink); line-height:1.2;}
 .obj .o-tease{font-size:.74rem; color:var(--ink-soft); margin-top:7px;}
 .note{padding:16px 17px 28px; flex:1 1 0; rotate:-.5deg;}
-.stone{padding:15px 17px 24px; rotate:.4deg; background:linear-gradient(160deg,#E7DCC4,#D8CBAF); border-color:rgba(26,23,20,.3);}
+.stone{padding:15px 17px 24px; flex:1 1 0; rotate:.4deg; background:linear-gradient(160deg,#E7DCC4,#D8CBAF); border-color:rgba(26,23,20,.3);}
 .pad{padding:16px 17px 26px; flex:1 1 0; rotate:.5deg;}
 .note .dq-live{font-family:'Fraunces',serif; font-style:italic; font-size:.8rem; color:var(--gold-deep); margin-top:9px; min-height:34px;}
+
+/* ---------- sticky notes: the four Doctrine voices, pinned to the desk ---------- */
+.stickies{display:flex; flex-direction:column; align-items:flex-start; gap:14px; height:100%; min-height:0;}
+.stick-col{display:contents;} /* desktop: wrapper is invisible to layout — original stacking order preserved */
+.stick-row{display:contents;} /* desktop: same — mobile media query below makes it a real row */
+.doctrine-head{display:none;} /* mobile-only — shown inside the 880px media query */
+.doctrine-seal{display:none;} /* mobile-only — shown inside the 880px media query */
+.sticky{position:relative; border-radius:2px; padding:15px 16px 14px; cursor:default;
+  box-shadow:0 10px 22px -14px rgba(46,34,16,.55), 0 2px 5px -3px rgba(46,34,16,.4);
+  transition:transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s;}
+.sticky:hover{transform:translateY(-4px) rotate(0deg); box-shadow:0 20px 36px -16px rgba(46,34,16,.6);}
+.sticky::after{content:""; position:absolute; top:0; right:0; width:0; height:0;
+  border-style:solid; border-width:0 16px 16px 0; border-color:transparent rgba(26,23,20,.10) transparent transparent;}
+.sticky .o-kind{color:rgba(26,23,20,.62); font-weight:600;}
+.sticky .sq{font-family:'Fraunces',serif; font-style:italic; font-weight:300; font-size:.82rem; line-height:1.38; color:var(--ink); margin-top:8px;}
+.sticky.lineage{width:100%; padding:21px 20px 18px; background:linear-gradient(160deg,#F6C888,#E39A3E); rotate:-1deg;}
+.sticky.lineage .sq{font-size:.94rem; line-height:1.44;}
+.sticky.passion{width:88%; padding:17px 17px 15px; background:linear-gradient(160deg,#D8F286,#A9D93A); rotate:.8deg;}
+.sticky.dharma{width:74%; padding:14px 15px 13px; background:linear-gradient(160deg,#84E2F5,#2FB6DC); rotate:-.6deg;}
+.sticky.dharma .sq,.sticky.profession .sq{font-size:.76rem; line-height:1.3;}
+.sticky.profession{width:60%; padding:12px 13px 11px; background:linear-gradient(160deg,#E39468,#BD6238); rotate:.9deg;}
+.sticky.dharma .stu-mini,.sticky.profession .stu-mini{padding:7px 8px 7px;}
+.sticky.dharma .stu-name,.sticky.profession .stu-name{font-size:.68rem;}
+.sticky.dharma .stu-tag,.sticky.profession .stu-tag{font-size:.56rem;}
+
+.sticky-seal{display:flex; align-items:center; justify-content:center; gap:5px; margin-top:13px; padding-top:10px; border-top:1px solid rgba(26,23,20,.16);}
+.sticky-seal .lr-ram{font-size:.68rem; padding:0 2px;}
+.sticky-seal .lr-lotus{filter:drop-shadow(0 0 4px rgba(200,80,0,.35));}
+
+.lin-attr{margin-top:13px; padding-top:11px; border-top:1px solid rgba(26,23,20,.16);}
+.lin-role{font-family:'Space Grotesk',sans-serif; font-size:.54rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(26,23,20,.62);}
+.lin-name{font-family:'Fraunces',serif; font-size:.98rem; color:var(--ink); margin-top:4px;}
+.lin-org{font-family:'Space Grotesk',sans-serif; font-size:.58rem; letter-spacing:.14em; color:rgba(26,23,20,.62); margin-top:4px;}
+
+.stu-pair{display:flex; flex-direction:column; margin-top:11px;}
+.stu-mini{padding:8px 0 7px; cursor:pointer;}
+.stu-mini + .stu-mini{border-top:1px solid rgba(26,23,20,.18);}
+.stu-mini .stu-name{font-family:'Fraunces',serif; font-size:.74rem; line-height:1.15; color:var(--ink); transition:opacity .2s;}
+.stu-mini:hover .stu-name{opacity:.68;}
+.stu-mini .stu-tag{font-size:.6rem; line-height:1.28; color:rgba(26,23,20,.7); margin-top:4px;}
+.stu-mini .stu-stat{display:inline-block; margin-top:6px; font-family:'Space Grotesk',sans-serif; font-size:.44rem; letter-spacing:.14em; text-transform:uppercase;}
+.stu-mini .stu-stat.live{color:#1F5E1F;} .stu-mini .stu-stat.soon{color:rgba(26,23,20,.55);}
+.stu-mini .stu-stat.live::before{content:"● "; color:#2E8B2E;}
+.stu-mini .stu-explain{display:inline-block; margin-top:6px; margin-left:8px; font-family:'Space Grotesk',sans-serif; font-size:.52rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink); border-bottom:1px solid currentColor; opacity:.72;}
 
 /* instruments (decor) */
 .instruments{position:fixed; left:0; bottom:78px; z-index:1; pointer-events:none; opacity:.5;}
@@ -249,14 +294,44 @@ textarea{min-height:70px; resize:none;}
   [data-mp]{display:none;}
   [data-mp].mp-active{display:block; animation:mpfade .32s ease;}
   @keyframes mpfade{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
-  .master{order:0; max-width:none; rotate:0deg; margin-bottom:0; overflow:visible;}
-  .note{order:1; flex:0 0 auto;} .sgrid{order:1;} .stone{order:2;} .pad{order:3;}
+  .master{order:0; max-width:none; rotate:0deg; margin-bottom:0; overflow:visible; padding-left:88px;}
+  .stickies{order:1;} .stone{order:2;} .pad{order:3;}
   .master:hover{transform:none;}
-  .sgrid.mp-active{display:grid; grid-template-columns:1fr 1fr; height:auto; gap:14px;}
-  .studio{min-height:140px; padding:14px 14px 14px; rotate:0deg;} .studio:nth-child(even){rotate:0deg;}
-  .studio .st-num{font-size:1.35rem;} .studio .st-name{font-size:1rem; margin-top:8px;} .studio .st-stat{font-size:.56rem;}
-  .doctrine-brief-mobile{margin-top:10px; font-size:.72rem; line-height:1.45;}
-  .note{padding-bottom:18px;}
+  .doctrine-head{display:block; width:100%; text-align:center; margin-bottom:1px;
+    font-family:'Space Grotesk',sans-serif; font-size:.54rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep);}
+  .doctrine-seal{display:flex; align-items:center; justify-content:center; gap:8px; width:100%; margin-top:6px;}
+  .doctrine-seal .lr-ram{font-size:1rem; color:var(--copper);}
+  /* two real columns — Lineage+Dharma left, Passion+Profession right — each flows to its own height,
+     matching the sketch's actual pairing. Sized to fit one screen: no scroll needed on this page. */
+  .stickies.mp-active{display:flex; flex-direction:column; height:auto; gap:6px;}
+  .stick-row{display:flex; flex-direction:row; align-items:flex-start; gap:10px; width:100%;}
+  .stick-col{display:flex; flex-direction:column; gap:10px; flex:1 1 0; min-width:0;}
+  .sticky{rotate:0deg!important; width:100%!important;}
+  .stu-pair{gap:5px;}
+  .obj:hover{transform:none;}
+  /* compact type scale for the two-column fit — hierarchy now reads via padding + line count, not width */
+  .sticky.lineage{padding:14px 13px 12px;}
+  .sticky.lineage .sq{font-size:.72rem; line-height:1.32;}
+  .sticky.lineage .lin-attr{margin-top:9px; padding-top:8px;}
+  .sticky.lineage .lin-role{font-size:.44rem;}
+  .sticky.lineage .lin-name{font-size:.8rem;}
+  .sticky.lineage .lin-org{font-size:.46rem;}
+  .sticky.passion{padding:12px 12px 10px;}
+  .sticky.passion .sq{font-size:.64rem; line-height:1.28;}
+  .sticky.dharma,.sticky.profession{padding:9px 10px 9px;}
+  .sticky.dharma .sq,.sticky.profession .sq{font-size:.56rem; line-height:1.22;}
+  .sticky .o-kind{font-size:.5rem;}
+  .sticky.lineage .o-kind{font-size:.56rem;}
+  .stu-mini{padding:5px 0 4px;}
+  .stu-mini .stu-name{font-size:.6rem;}
+  .sticky.dharma .stu-name,.sticky.profession .stu-name{font-size:.54rem;}
+  .stu-mini .stu-tag{font-size:.48rem; line-height:1.15; margin-top:2px;}
+  .sticky.dharma .stu-tag,.sticky.profession .stu-tag{font-size:.44rem;}
+  .stu-mini .stu-stat{font-size:.36rem; margin-top:3px;}
+  .stu-mini .stu-explain{font-size:.4rem; margin-top:3px;}
+  .sticky-seal{margin-top:8px; padding-top:6px; gap:4px;}
+  .sticky-seal .lr-lotus svg{width:13px; height:9px;}
+  .sticky-seal .lr-ram{font-size:.5rem;}
   .obj:hover{transform:none;}
   .enq-grid{grid-template-columns:1fr; gap:22px;}
   .lin-grid{grid-template-columns:1fr; gap:18px;}
@@ -377,6 +452,119 @@ textarea{min-height:70px; resize:none;}
   0%{ opacity:0; transform:translateY(20px); filter:blur(4px); }
   100%{ opacity:1; transform:translateY(0); filter:blur(0); }
 }
+
+/* ============================================================
+   THE ROAMING GUIDE  ·  drifts the desk until you catch it
+   Name lives in one place: the .g-name span in the markup and
+   the GUIDE_NAME constant in JS. Change both to rename.
+   Accessibility: tires after 3 dodges and sits still; static for
+   prefers-reduced-motion; Tab-reachable; 48px hit area on touch.
+   ============================================================ */
+#guideToken{
+  position:fixed; z-index:150; width:62px; height:62px; border:none; padding:0;
+  border-radius:50%; cursor:grab; background:transparent; touch-action:none;
+  transition:transform .25s cubic-bezier(.2,.8,.3,1.2), opacity .4s, filter .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+#guideToken.gt-dragging{
+  cursor:grabbing; transform:scale(1.08);
+  filter:drop-shadow(0 10px 20px rgba(46,34,16,.5));
+}
+#guideToken .gt-disc{
+  position:absolute; inset:0; border-radius:50%;
+  background:radial-gradient(circle at 34% 28%, #FBF6EA, #EFE4CB 55%, #DCCBA4);
+  border:1.5px solid var(--gold); box-shadow:0 10px 22px -10px rgba(46,34,16,.55);
+  display:flex; align-items:center; justify-content:center;
+}
+#guideToken .gt-mark{font-family:'Fraunces',serif; font-size:1.28rem; line-height:1; letter-spacing:-.02em;}
+#guideToken .gt-mark .j{color:var(--gold-deep);} #guideToken .gt-mark .v{color:var(--silver);}
+#guideToken .gt-ring{
+  position:absolute; inset:-7px; border-radius:50%; border:1px solid var(--gold);
+  opacity:.5; animation:gtPulse 2.6s ease-in-out infinite;
+}
+@keyframes gtPulse{0%,100%{transform:scale(1); opacity:.42;} 50%{transform:scale(1.1); opacity:.1;}}
+#guideToken:hover{transform:scale(1.07);}
+#guideToken:focus-visible{outline:2px solid var(--saffron); outline-offset:5px;}
+#guideToken.gt-tired .gt-ring{animation:none; opacity:.7; border-color:var(--saffron);}
+#guideToken.gt-hide{opacity:0; pointer-events:none;}
+.gt-tip{
+  position:absolute; bottom:-24px; left:50%; transform:translateX(-50%); white-space:nowrap;
+  font-family:'Space Grotesk',sans-serif; font-size:.54rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--gold-deep); opacity:.85; text-shadow:0 1px 2px rgba(247,242,231,.8);
+}
+#guideToken.gt-tired .gt-tip{opacity:1;}
+
+/* ---------- panel ---------- */
+#guidePanel{
+  position:fixed; inset:0; z-index:400; display:flex; align-items:center; justify-content:center;
+  padding:24px; background:rgba(26,23,20,.5); backdrop-filter:blur(3px);
+  opacity:0; pointer-events:none; transition:opacity .35s;
+}
+#guidePanel.open{opacity:1; pointer-events:auto;}
+.gp{
+  width:min(760px, 100%); max-height:min(86vh, 780px); background:var(--sheet);
+  border:1px solid var(--rule-strong); border-radius:4px; position:relative;
+  box-shadow:0 40px 90px -30px rgba(26,23,20,.7); display:flex; flex-direction:column;
+  transform:translateY(16px) scale(.985); transition:transform .35s cubic-bezier(.2,.8,.3,1);
+  background-image:linear-gradient(rgba(26,23,20,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(26,23,20,.035) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+#guidePanel.open .gp{transform:none;}
+.gp-head{padding:22px 26px 0; flex:0 0 auto;}
+.gp-kick{font-family:'Space Grotesk',sans-serif; font-size:.56rem; letter-spacing:.24em;
+  text-transform:uppercase; color:var(--gold-deep);}
+.gp-name{font-family:'Fraunces',serif; font-size:1.72rem; margin-top:4px; color:var(--ink);}
+.gp-name em{font-style:italic; color:var(--gold-deep); font-size:.74em;}
+.gp-sub{font-size:.82rem; color:var(--ink-soft); margin-top:6px; line-height:1.5;}
+.gp-close{position:absolute; top:14px; right:16px; width:32px; height:32px; border-radius:50%;
+  border:1px solid var(--rule-strong); background:none; cursor:pointer; color:var(--ink-soft);
+  font-size:1.1rem; line-height:1; transition:.25s;}
+.gp-close:hover{background:var(--ink); color:var(--sheet);}
+.gp-tabs{display:flex; gap:4px; padding:16px 26px 0; border-bottom:1px solid var(--rule); flex:0 0 auto; flex-wrap:wrap;}
+.gp-tab{font-family:'Space Grotesk',sans-serif; font-size:.62rem; letter-spacing:.16em;
+  text-transform:uppercase; padding:9px 13px; border:none; background:none; cursor:pointer;
+  color:var(--silver); border-bottom:2px solid transparent; transition:.2s;}
+.gp-tab:hover{color:var(--ink);}
+.gp-tab.on{color:var(--gold-deep); border-bottom-color:var(--gold);}
+.gp-body{padding:22px 26px 26px; overflow-y:auto; flex:1 1 auto; min-height:0;}
+.gp-body h3{font-family:'Fraunces',serif; font-size:1.16rem; margin:0 0 10px;}
+.gp-body p{font-size:.86rem; line-height:1.68; color:var(--ink-soft); margin-bottom:12px;}
+.gp-body p strong{color:var(--ink);}
+
+/* faq */
+.g-q{border-bottom:1px solid var(--rule);}
+.g-q:last-child{border-bottom:none;}
+.g-q-t{width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:13px 0;
+  font-family:'Fraunces',serif; font-size:.95rem; color:var(--ink); display:flex; gap:12px; align-items:baseline;}
+.g-q-t::after{content:"+"; margin-left:auto; color:var(--gold); font-family:'Space Grotesk',sans-serif; flex:0 0 auto;}
+.g-q.on .g-q-t::after{content:"–";}
+.g-q-a{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+.g-q.on .g-q-a{max-height:340px;}
+.g-q-a p{font-size:.83rem; line-height:1.66; padding-bottom:13px; margin:0;}
+
+/* legal */
+.g-legal-nav{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px;}
+.g-legal-nav button{font-family:'Space Grotesk',sans-serif; font-size:.56rem; letter-spacing:.14em;
+  text-transform:uppercase; padding:7px 11px; border:1px solid var(--rule-strong); background:none;
+  cursor:pointer; color:var(--ink-soft); border-radius:2px; transition:.2s;}
+.g-legal-nav button.on{background:var(--ink); color:var(--sheet); border-color:var(--ink);}
+.g-doc h4{font-family:'Space Grotesk',sans-serif; font-size:.62rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--gold-deep); margin:16px 0 7px;}
+.g-doc h4:first-child{margin-top:0;}
+.g-doc p, .g-doc li{font-size:.79rem; line-height:1.66; color:var(--ink-soft);}
+.g-doc ul{margin:0 0 12px 17px;}
+.g-doc li{margin-bottom:5px;}
+.g-doc .g-updated{font-family:'Space Grotesk',sans-serif; font-size:.56rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--silver-dim); margin-top:18px; padding-top:12px; border-top:1px solid var(--rule);}
+.g-todo{background:rgba(224,119,42,.12); border-left:3px solid var(--saffron); padding:9px 12px;
+  font-size:.76rem; line-height:1.55; color:var(--ink); margin:10px 0; border-radius:0 2px 2px 0;}
+@media (max-width:880px){
+  .gp{max-height:88vh;} .gp-body{padding:18px 20px 22px;}
+  .gp-head{padding:18px 20px 0;} .gp-tabs{padding:13px 20px 0;}
+  .gp-tab{font-size:.58rem; padding:8px 10px;}
+  #guideToken{width:56px; height:56px;}
+}
+
 </style>
 </head>
 <body>
@@ -602,16 +790,8 @@ textarea{min-height:70px; resize:none;}
   </header>
 
   <div class="desk">
-    <!-- LEFT: doctrine note, cornerstone, enquiry pad -->
+    <!-- LEFT: cornerstone, enquiry pad -->
     <div class="col col-l">
-      <div class="obj note" data-mp="1" onclick="openLoupe('doctrine')" role="button" tabindex="0">
-        <span class="tack" style="top:-5px;left:14px;"></span>
-        <div class="o-kind" id="noteKind">03 · The JV Doctrine</div>
-        <div class="o-title" id="noteTitle">What we hold to be true.</div>
-        <div class="dq-live" id="noteLive"></div>
-        <p class="doctrine-brief-mobile"><span>Visualisation · Branding · Spatial Design</span><span>Education · Broadcasting · Heritage Research</span></p>
-        <span class="o-open mp-tap">↗</span>
-      </div>
       <div class="obj stone" data-mp="2" onclick="openLoupe('legacy')" role="button" tabindex="0">
         <span class="weight"></span>
         <div class="o-kind" id="stoneKind">04 · Legacy</div>
@@ -650,9 +830,95 @@ textarea{min-height:70px; resize:none;}
       </div>
     </div>
 
-    <!-- RIGHT: six studio drawings -->
+    <!-- RIGHT: the four Doctrine voices, as pinned sticky notes -->
     <div class="col col-r">
-      <div class="sgrid" id="sgrid" data-mp="1"></div>
+      <div class="stickies" data-mp="1">
+        <div class="doctrine-head">Sheet-02 · The JV Doctrine</div>
+
+        <div class="stick-row">
+        <div class="stick-col">
+        <div class="sticky lineage">
+          <span class="tack" style="top:-6px;left:16px;"></span>
+          <div class="o-kind">Lineage</div>
+          <p class="sq">&ldquo;We design spaces the way our ancestors did — with reverence for the earth, alignment with the cosmos, and a silent, burning dedication to perfection.&rdquo;</p>
+          <div class="lin-attr">
+            <div class="lin-role">The Founder &amp; Creative Director</div>
+            <div class="lin-name" style="white-space:nowrap">Punith Kumar V Char</div>
+            <div class="lin-org">— JV Studios · 2025</div>
+          </div>
+        </div>
+
+        <div class="sticky dharma">
+          <span class="tack" style="top:-6px;left:16px;"></span>
+          <div class="o-kind">Dharma</div>
+          <p class="sq">&ldquo;Knowledge. Skills. Transformation. Rooted in Dharma. Designed for Bharat.&rdquo;</p>
+          <div class="stu-pair">
+            <div class="stu-mini" onclick="openStudio(3)" role="button" tabindex="0">
+              <div class="stu-name">JV Bharat Studio</div>
+              <div class="stu-tag">Knowledge. Skills. Transformation.</div>
+              <span class="stu-stat soon">Coming Soon</span>
+              <span class="stu-explain">Explain →</span>
+            </div>
+            <div class="stu-mini" onclick="openStudio(4)" role="button" tabindex="0">
+              <div class="stu-name">JV Digital Studio</div>
+              <div class="stu-tag">Broadcasting the Eternal Bharatiya Sanskruti.</div>
+              <span class="stu-stat soon">Coming Soon</span>
+              <span class="stu-explain">Explain →</span>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <div class="stick-col">
+        <div class="sticky passion">
+          <span class="tack" style="top:-6px;right:16px;"></span>
+          <div class="o-kind">Passion</div>
+          <p class="sq">&ldquo;From the Labs, authenticity flows to every studio.&rdquo;</p>
+          <div class="stu-pair">
+            <div class="stu-mini" onclick="openStudio(5)" role="button" tabindex="0">
+              <div class="stu-name">JV Sthapatya Labs</div>
+              <div class="stu-tag">The Digital Library of Bharat's Timeless Temples.</div>
+              <span class="stu-stat soon">Coming Soon</span>
+              <span class="stu-explain">Explain →</span>
+            </div>
+            <div class="stu-mini" onclick="openStudio(1)" role="button" tabindex="0">
+              <div class="stu-name">JV Sanchar Studio</div>
+              <div class="stu-tag">We Connect Your Brand from Chintamani to the World.</div>
+              <span class="stu-stat live">Live</span>
+              <span class="stu-explain">Explain →</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sticky profession">
+          <span class="tack" style="top:-6px;right:16px;"></span>
+          <div class="o-kind">Profession</div>
+          <p class="sq">&ldquo;Before the foundation, comes the vision.&rdquo;</p>
+          <div class="stu-pair">
+            <div class="stu-mini" onclick="openStudio(0)" role="button" tabindex="0">
+              <div class="stu-name">JV Visual Studio</div>
+              <div class="stu-tag">Before the Foundation, Comes the Vision.</div>
+              <span class="stu-stat live">Live</span>
+              <span class="stu-explain">Explain →</span>
+            </div>
+            <div class="stu-mini" onclick="openStudio(2)" role="button" tabindex="0">
+              <div class="stu-name">JV Antara Studio</div>
+              <div class="stu-tag">Spaces Aligned to be Smart With Purpose.</div>
+              <span class="stu-stat soon">Coming Soon</span>
+              <span class="stu-explain">Explain →</span>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="doctrine-seal" aria-hidden="true">
+          <span class="lr-lotus"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 72" width="24" height="17"><path d="M50,65 C28,52 6,46 3,22 C19,32 37,44 50,65Z" fill="#C82000"/><path d="M50,65 C72,52 94,46 97,22 C81,32 63,44 50,65Z" fill="#C82000"/><path d="M50,65 C18,56 1,58 0,34 C14,42 35,52 50,65Z" fill="#A01800"/><path d="M50,65 C82,56 99,58 100,34 C86,42 65,52 50,65Z" fill="#A01800"/><path d="M50,65 C22,42 16,16 28,4 C34,18 42,38 50,65Z" fill="#D43010"/><path d="M50,65 C78,42 84,16 72,4 C66,18 58,38 50,65Z" fill="#D43010"/><path d="M50,65 C41,32 40,8 50,0 C60,8 59,32 50,65Z" fill="#E04818"/><path d="M50,62 C43,36 43,14 50,8 C57,14 57,36 50,62Z" fill="#F08428"/><ellipse cx="50" cy="40" rx="10" ry="15" fill="#C88010"/><ellipse cx="50" cy="40" rx="6.5" ry="10" fill="#E8A020"/><ellipse cx="50" cy="38" rx="3.5" ry="5.5" fill="#FFD040"/></svg></span>
+          <span class="lr-ram">RAM</span>
+          <span class="lr-lotus" style="animation-delay:1s"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 72" width="24" height="17"><path d="M50,65 C28,52 6,46 3,22 C19,32 37,44 50,65Z" fill="#C82000"/><path d="M50,65 C72,52 94,46 97,22 C81,32 63,44 50,65Z" fill="#C82000"/><path d="M50,65 C18,56 1,58 0,34 C14,42 35,52 50,65Z" fill="#A01800"/><path d="M50,65 C82,56 99,58 100,34 C86,42 65,52 50,65Z" fill="#A01800"/><path d="M50,65 C22,42 16,16 28,4 C34,18 42,38 50,65Z" fill="#D43010"/><path d="M50,65 C78,42 84,16 72,4 C66,18 58,38 50,65Z" fill="#D43010"/><path d="M50,65 C41,32 40,8 50,0 C60,8 59,32 50,65Z" fill="#E04818"/><path d="M50,62 C43,36 43,14 50,8 C57,14 57,36 50,62Z" fill="#F08428"/><ellipse cx="50" cy="40" rx="10" ry="15" fill="#C88010"/><ellipse cx="50" cy="40" rx="6.5" ry="10" fill="#E8A020"/><ellipse cx="50" cy="38" rx="3.5" ry="5.5" fill="#FFD040"/></svg></span>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -698,6 +964,30 @@ textarea{min-height:70px; resize:none;}
 <div class="hint" id="hint">Tap a drawing to lift it</div>
 
 <!-- LOUPE -->
+
+<!-- ============ THE ROAMING GUIDE ============ -->
+<button id="guideToken" class="gt-hide" aria-label="Catch the guide — opens help about JV Studios">
+  <span class="gt-ring"></span>
+  <span class="gt-disc"><span class="gt-mark"><span class="j">J</span><span class="v">V</span></span></span>
+  <span class="gt-tip">Catch me</span>
+</button>
+
+<div id="guidePanel" role="dialog" aria-modal="true" aria-labelledby="gpName" onclick="if(event.target===this)closeGuide()">
+  <div class="gp">
+    <button class="gp-close" onclick="closeGuide()" aria-label="Close">✕</button>
+    <div class="gp-head">
+      <div class="gp-kick">You caught the guide</div>
+      <div class="gp-name" id="gpName">Sūtra <em>— the thread</em></div>
+      <p class="gp-sub">The measuring cord a builder snaps before the first stone. Ask, and I will lay the line.</p>
+    </div>
+    <div class="gp-tabs" role="tablist">
+      <button class="gp-tab on" role="tab" onclick="guideTab('faq',this)">Questions</button>
+      <button class="gp-tab" role="tab" onclick="guideTab('legal',this)">Legal</button>
+    </div>
+    <div class="gp-body" id="gpBody"></div>
+  </div>
+</div>
+
 <div class="loupe" id="loupe" onclick="if(event.target===this)closeLoupe()">
   <div class="lp" role="dialog" aria-modal="true">
     <div class="lp-tacks" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -733,21 +1023,6 @@ var voices=[
 ];
 var chipNames=["JV Visual Studio","JV Sanchar Studio","JV Antara Studio","JV Bharat Studio","JV Digital Studio","JV Sthapatya Labs","Not sure yet"];
 
-/* build studio drawings */
-(function(){
-  var g=document.getElementById('sgrid');
-  studios.forEach(function(s,i){
-    var d=document.createElement('div'); d.className='obj studio'+(s.live?' lit':'');
-    d.setAttribute('role','button'); d.setAttribute('tabindex','0');
-    d.innerHTML='<span class="tack" style="top:-5px;left:50%;transform:translateX(-50%)"></span>'+
-      '<div class="st-num">'+s.num+'</div><div class="st-name">'+s.name+'</div>'+
-      '<div class="st-stat '+(s.live?'live':'soon')+'">'+(s.live?'Live':'Coming Soon')+'</div>';
-    d.addEventListener('click',function(){ openStudio(i); });
-    d.addEventListener('keydown',function(e){ if(e.key==='Enter') openStudio(i); });
-    g.appendChild(d);
-  });
-})();
-
 /* ---------- loupe ---------- */
 var lp=document.getElementById('loupe'), lpBody=document.getElementById('lpBody');
 function showLoupe(html){ lpBody.innerHTML=html; lp.classList.add('open'); lp.setAttribute('aria-hidden','false'); }
@@ -767,6 +1042,10 @@ function openStudio(i){
     '<p class="lp-tag">'+s.tag+'</p>'+act
   );
 }
+
+document.querySelectorAll('.stu-mini').forEach(function(el){
+  el.addEventListener('keydown', function(e){ if(e.key==='Enter') el.click(); });
+});
 
 var vIdx=0, vTimer=null;
 function renderVoice(i){
@@ -854,13 +1133,19 @@ function openLoupe(kind){ if(kind==='doctrine') openDoctrine(); else if(kind==='
 /* clock */
 (function(){ function t(){ try{ document.getElementById('clock').textContent=new Date().toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit'})+' IST'; }catch(_){ document.getElementById('clock').textContent=new Date().toLocaleTimeString(); } } t(); setInterval(t,30000); })();
 
-/* RAM heartbeat — multilingual, original copper colour */
+/* RAM heartbeat — multilingual, original copper colour — now drives every sheet's seal, not just the footer */
 (function(){
-  var el=document.getElementById('ramWord'); if(!el) return;
+  var els=document.querySelectorAll('.lr-ram'); if(!els.length) return;
   var forms=['RAM','राम','ರಾಮ','రామ','ராம','രാമൻ','RAM','রাম','ਰਾਮ','રામ'];
   var fonts=["'Yatra One',serif","'Hind',sans-serif","'Hind',sans-serif","'Hind',sans-serif","'Hind',sans-serif","'Hind',sans-serif","'Yatra One',serif","'Hind',sans-serif","'Hind',sans-serif","'Hind',sans-serif"];
   var i=0;
-  setInterval(function(){ i=(i+1)%forms.length; el.style.opacity='0'; el.style.transition='opacity .18s'; setTimeout(function(){ el.textContent=forms[i]; el.style.fontFamily=fonts[i]; el.style.opacity=''; },180); },2800);
+  setInterval(function(){
+    i=(i+1)%forms.length;
+    els.forEach(function(el){ el.style.opacity='0'; el.style.transition='opacity .18s'; });
+    setTimeout(function(){
+      els.forEach(function(el){ el.textContent=forms[i]; el.style.fontFamily=fonts[i]; el.style.opacity=''; });
+    },180);
+  },2800);
 })();
 
 /* ---------- mobile-only 4-page nav (Home / Studios+Doctrine / Legacy / Enquire) ---------- */
@@ -972,6 +1257,380 @@ function toast(label,msg,href){ var t=document.getElementById('toast'); t.innerH
 function eggLegacy(){ if(++cG>=3){cG=0; toast('Gold unlocked · Egg 1 of 3','Every legacy begins as a vision —','https://j-v-visual-studio.vercel.app/'); } }
 function eggVision(){ if(++cS>=3){cS=0; toast('Silver unlocked · Egg 2 of 3','A vision must be heard to be built —','https://jvsanchar.netlify.app/'); } }
 function eggPranaTattva(){ if(++cP>=5){cP=0; toast('Saffron unlocked · Egg 3 of 3','Knowledge, carried forward —','https://share.google/QpBd8UKYns2oBEBhZ'); } }
+
+
+/* ============================================================
+   THE ROAMING GUIDE — drift, dodge, tire, open
+   ============================================================ */
+(function(){
+  var tok = document.getElementById('guideToken');
+  var panel = document.getElementById('guidePanel');
+  var loupe = document.getElementById('loupe');
+  if(!tok || !panel) return;
+
+  var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var DRIFT_MS = 1500, RESUME_MS = 1200, TAP_TOLERANCE = 6;
+  var driftTimer = null, resumeTimer = null, held = false, sheetVisible = false;
+  var curX = 40, curY = 90;
+
+  function vw(){ return window.innerWidth; }
+  function vh(){ return window.innerHeight; }
+  function size(){ return tok.offsetWidth || 62; }
+  function modalOpen(){
+    return panel.classList.contains('open') || (loupe && loupe.classList.contains('open'));
+  }
+  function autonomyBlocked(){ return held || modalOpen(); }
+
+  /* The guide exists only on the Legacy sheet (Sheet-03), and only in
+     the free space of that card: below its own text (kicker, title,
+     tease line), above whatever sits beneath it (the mobile page-nav
+     bar, or simply the card's own edge on desktop), inside its left
+     and right padding. Bounds are read from real DOM geometry each
+     time, so they hold on any screen size rather than a guessed box. */
+  function bounds(){
+    var s = size(), pad = 14;
+    var stone = document.querySelector('.obj.stone');
+    if(!stone) return { x0:16, y0:56, x1:vw()-s-16, y1:vh()-s-84 };
+
+    var r = stone.getBoundingClientRect();
+    var tease = stone.querySelector('.o-tease');
+    var textBottom = tease ? tease.getBoundingClientRect().bottom : r.top + 60;
+
+    var floor = r.bottom;
+    if(isMobileView()){
+      var nav = document.getElementById('mobileNav');
+      if(nav) floor = Math.min(floor, nav.getBoundingClientRect().top);
+    }
+
+    var x0 = r.left + pad, x1 = r.right - s - pad;
+    var y0 = textBottom + pad, y1 = floor - s - pad;
+
+    if(y1 < y0){ y0 = r.top + pad; y1 = Math.max(y0, floor - s - pad); }
+    if(x1 < x0) x1 = x0;
+    return { x0:x0, y0:y0, x1:x1, y1:y1 };
+  }
+
+  function place(x, y){
+    var b = bounds();
+    curX = Math.max(b.x0, Math.min(x, b.x1));
+    curY = Math.max(b.y0, Math.min(y, b.y1));
+    tok.style.left = curX + 'px';
+    tok.style.top  = curY + 'px';
+  }
+
+  function randomSpot(){
+    var b = bounds(), w = Math.max(1, b.x1 - b.x0), h = Math.max(1, b.y1 - b.y0);
+    place(b.x0 + Math.random() * w, b.y0 + Math.random() * h);
+  }
+
+  /* ---------- ambient fallback drift (desktop, or no gyro signal) ---------- */
+  function startDrift(){
+    if(driftTimer) clearInterval(driftTimer);
+    driftTimer = setInterval(function(){
+      if(!gyroActive && !autonomyBlocked()) randomSpot();
+    }, DRIFT_MS);
+  }
+
+  /* ---------- gyroscope: tilt the phone, the token rolls like a marble ---------- */
+  var gyroActive = false, gyroLastSeen = 0, vx = 0, vy = 0, tiltX = 0, tiltY = 0;
+  var ACCEL = 0.03, FRICTION = 0.92, MAX_TILT = 30, MAX_V = 14;
+
+  function onOrientation(e){
+    if(e.gamma === null || e.beta === null) return;
+    tiltX = Math.max(-MAX_TILT, Math.min(MAX_TILT, e.gamma));
+    tiltY = Math.max(-MAX_TILT, Math.min(MAX_TILT, e.beta - 35));
+    gyroActive = true;
+    gyroLastSeen = Date.now();
+  }
+  function physicsFrame(){
+    if(gyroActive && !autonomyBlocked() && Date.now() - gyroLastSeen < 1000){
+      var b = bounds();
+      vx = Math.max(-MAX_V, Math.min(MAX_V, vx + tiltX * ACCEL));
+      vy = Math.max(-MAX_V, Math.min(MAX_V, vy + tiltY * ACCEL));
+      vx *= FRICTION; vy *= FRICTION;
+      var nx = curX + vx, ny = curY + vy;
+      if(nx <= b.x0 || nx >= b.x1) vx *= -0.35;
+      if(ny <= b.y0 || ny >= b.y1) vy *= -0.35;
+      place(nx, ny);
+    }
+    requestAnimationFrame(physicsFrame);
+  }
+  function enableGyro(){
+    if(!window.DeviceOrientationEvent) return;
+    window.addEventListener('deviceorientation', onOrientation, true);
+  }
+  function requestGyroPermission(){
+    if(window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === 'function'){
+      DeviceOrientationEvent.requestPermission().then(function(state){
+        if(state === 'granted') enableGyro();
+      }).catch(function(){});
+    } else {
+      enableGyro();
+    }
+  }
+
+  /* ---------- drag: same pointerdown/move/up/cancel + setPointerCapture
+     pattern already proven on the T-square ruler elsewhere on this page,
+     just in two dimensions instead of one. A tap (near-zero movement)
+     still opens the guide; an actual drag just repositions it and never
+     opens the panel. ---------- */
+  var dragging = false, sx = 0, sy = 0, startLeft = 0, startTop = 0, moved = 0;
+
+  tok.addEventListener('pointerdown', function(e){
+    dragging = true; held = true; moved = 0;
+    tok.classList.add('gt-dragging');
+    vx = 0; vy = 0; gyroActive = false;
+    if(resumeTimer){ clearTimeout(resumeTimer); resumeTimer = null; }
+    sx = e.clientX; sy = e.clientY;
+    startLeft = curX; startTop = curY;
+    try{ tok.setPointerCapture(e.pointerId); }catch(_){}
+    e.preventDefault();
+  });
+  tok.addEventListener('pointermove', function(e){
+    if(!dragging) return;
+    var dx = e.clientX - sx, dy = e.clientY - sy;
+    moved = Math.max(moved, Math.abs(dx), Math.abs(dy));
+    place(startLeft + dx, startTop + dy);
+  });
+  function endDrag(e){
+    if(!dragging) return;
+    dragging = false; held = false;
+    tok.classList.remove('gt-dragging');
+    try{ tok.releasePointerCapture(e.pointerId); }catch(_){}
+    if(moved < TAP_TOLERANCE){
+      openGuide();
+    } else {
+      resumeTimer = setTimeout(function(){ resumeTimer = null; }, RESUME_MS);
+    }
+  }
+  tok.addEventListener('pointerup', endDrag);
+  tok.addEventListener('pointercancel', endDrag);
+
+  window.addEventListener('resize', function(){ if(sheetVisible) place(curX, curY); });
+
+  function showGuide(){
+    if(sheetVisible) return;
+    sheetVisible = true;
+    tok.classList.remove('gt-hide');
+    if(reduced){
+      place(bounds().x1, bounds().y1);
+      return;
+    }
+    randomSpot();
+    startDrift();
+  }
+  function hideGuide(){
+    if(!sheetVisible) return;
+    sheetVisible = false;
+    tok.classList.add('gt-hide');
+    if(driftTimer){ clearInterval(driftTimer); driftTimer = null; }
+    if(panel.classList.contains('open')) closeGuide();
+  }
+
+  var stoneEl = document.querySelector('.obj.stone');
+  if(stoneEl && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      var vis = entries[0] && entries[0].intersectionRatio > 0.35;
+      if(vis) showGuide(); else hideGuide();
+    }, { threshold: [0, 0.35, 1] });
+    io.observe(stoneEl);
+  }
+
+  if(!reduced){
+    requestAnimationFrame(physicsFrame);
+    document.addEventListener('click', requestGyroPermission, { once:true });
+    document.addEventListener('touchend', requestGyroPermission, { once:true });
+  }
+
+  window.openGuide = function(){
+    if(!sheetVisible) return;
+    panel.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if(!panel.dataset.filled){ guideTab('faq', document.querySelector('.gp-tab')); panel.dataset.filled = '1'; }
+    setTimeout(function(){ var c = panel.querySelector('.gp-close'); if(c) c.focus(); }, 60);
+  };
+  window.closeGuide = function(){
+    panel.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(function(){ tok.focus(); }, 60);
+  };
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && panel.classList.contains('open')) closeGuide();
+  });
+})();
+
+/* ---------- panel content ---------- */
+var GUIDE_FAQ = [
+  ["What is JV Studios?",
+   "A multidisciplinary creative house in Chintamani, Karnataka, working across six specialised studios — visualisation, branding, spatial design, education, broadcasting and heritage research. One team, from the first sketch to the lasting story."],
+  ["What does the name mean?",
+   "<strong>J</strong> honours the founder's grandmother. <strong>V</strong> is for his late father, V Char — a civil engineer who built over a hundred homes across Chintamani under JayaLakshmi Constructions. JV Studios continues that hand, now reimagined for the AI generation."],
+  ["Who runs it?",
+   "<span style='white-space:nowrap'>Punith Kumar V Char</span> — Founder &amp; Creative Director."],
+  ["Which studios can I work with today?",
+   "Two are live: <strong>JV Visual Studio</strong> (visualisation) and <strong>JV Sanchar Studio</strong> (branding &amp; digital). The remaining four are in draft and opening in stages — we would rather open one studio properly than four in name only."],
+  ["Do you work with clients outside Chintamani?",
+   "Yes. JV Sanchar Studio is open to clients well beyond Chintamani, and visualisation work travels anywhere. The desk stays here; the work does not have to."],
+  ["What does a project cost?",
+   "It depends entirely on scope — a single render and a full brand system are not the same job. Tell us what you are building through the enquiry sheet and you will get a written proposal, not a guess."],
+  ["How long does a project take?",
+   "Also scope-dependent. Timelines are set in the proposal before any work begins, so there are no moving targets once we start."],
+  ["What is the JV Doctrine?",
+   "<strong>Speak less. Observe sharply. Execute before time.</strong> It runs through four voices — Lineage, Passion, Dharma and Profession — each carrying the studios that answer to it. You will find them on the doctrine sheet."],
+  ["Do you use AI in your work?",
+   "Yes, deliberately and openly — it is in the studio's own line, <em>now reimagined for the AI generation</em>. AI is a tool in the hand; the judgement, the doctrine and the final call stay human."],
+  ["How do I start a conversation?",
+   "Open the enquiry sheet and tell us what you are building. It opens your own email app with the message ready — nothing is stored on this site. We write back from Chintamani."]
+];
+
+var GUIDE_LEGAL_DOC = 'privacy';
+
+function guideTab(kind, el){
+  document.querySelectorAll('.gp-tab').forEach(function(t){ t.classList.remove('on'); });
+  if(el) el.classList.add('on');
+  var b = document.getElementById('gpBody');
+  b.scrollTop = 0;
+
+  if(kind === 'faq'){
+    var f = '<h3>Ten questions, answered plainly</h3>';
+    GUIDE_FAQ.forEach(function(q){
+      f += '<div class="g-q"><button class="g-q-t" onclick="this.parentNode.classList.toggle(\'on\')">' + q[0] + '</button>' +
+           '<div class="g-q-a"><p>' + q[1] + '</p></div></div>';
+    });
+    b.innerHTML = f;
+
+  } else if(kind === 'legal'){
+    b.innerHTML =
+      '<div class="g-legal-nav">' +
+        '<button class="' + (GUIDE_LEGAL_DOC==='privacy'?'on':'') + '" onclick="guideLegal(\'privacy\')">Privacy</button>' +
+        '<button class="' + (GUIDE_LEGAL_DOC==='terms'?'on':'') + '" onclick="guideLegal(\'terms\')">Terms of Use</button>' +
+        '<button class="' + (GUIDE_LEGAL_DOC==='disclaimer'?'on':'') + '" onclick="guideLegal(\'disclaimer\')">Disclaimer</button>' +
+        '<button class="' + (GUIDE_LEGAL_DOC==='ip'?'on':'') + '" onclick="guideLegal(\'ip\')">IP &amp; Content</button>' +
+      '</div><div id="gpLegalDoc"></div>';
+    guideLegal(GUIDE_LEGAL_DOC, true);
+  }
+}
+
+function guideLegal(doc, skipNav){
+  GUIDE_LEGAL_DOC = doc;
+  if(!skipNav){
+    document.querySelectorAll('.g-legal-nav button').forEach(function(x){ x.classList.remove('on'); });
+    var map = {privacy:0, terms:1, disclaimer:2, ip:3};
+    var btns = document.querySelectorAll('.g-legal-nav button');
+    if(btns[map[doc]]) btns[map[doc]].classList.add('on');
+  }
+  document.getElementById('gpLegalDoc').innerHTML = GUIDE_LEGAL_DOCS[doc];
+  document.getElementById('gpBody').scrollTop = 0;
+}
+
+/* ------------------------------------------------------------
+   LEGAL DOCUMENTS
+   Grounded in India's DPDP Act 2023 and written against what
+   this site ACTUALLY does: no analytics, no cookies, no server,
+   no stored form data (the enquiry sheet opens the visitor's own
+   email client). Do not soften these into boilerplate that
+   claims tracking we do not do — accuracy is the protection.
+
+   >>> PLACEHOLDERS BELOW MUST BE FILLED BEFORE PUBLISHING <<<
+   ------------------------------------------------------------ */
+var LEGAL_ENTITY  = '[REGISTERED ENTITY NAME]';
+var LEGAL_GSTIN   = '[GSTIN — IF REGISTERED]';
+var LEGAL_ADDRESS = '4th Cross, Sonneshetthalli, Chintamani, Chikkaballapur, Karnataka 563125, India';
+var LEGAL_EMAIL   = 'pvchar.jv.designstudio@zohomail.in';
+var LEGAL_UPDATED = 'Last updated · August 2026';
+
+var GUIDE_TODO = '<div class="g-todo"><strong>Before publishing:</strong> replace ' + LEGAL_ENTITY +
+  ' and ' + LEGAL_GSTIN + ' with the real registered details, and have a lawyer read this once. ' +
+  'This draft is accurate to how the site behaves, but it is not legal advice.</div>';
+
+var GUIDE_LEGAL_DOCS = {
+
+privacy:
+  '<div class="g-doc">' + GUIDE_TODO +
+  '<h4>Privacy Policy</h4>' +
+  '<p>This policy explains how ' + LEGAL_ENTITY + ' (&ldquo;JV Studios&rdquo;, &ldquo;we&rdquo;) handles personal data on jvstudios.in, in line with India\'s <strong>Digital Personal Data Protection Act, 2023</strong>.</p>' +
+  '<h4>What this website collects</h4>' +
+  '<p><strong>Nothing.</strong> This site has no analytics, no advertising pixels, no tracking cookies and no server-side database. We do not profile visitors and we do not build audiences from your visit.</p>' +
+  '<h4>The enquiry sheet</h4>' +
+  '<p>The enquiry sheet does not transmit anything to us directly. It composes a message and opens it in <em>your own email application</em>. Nothing you type is stored on this website or sent anywhere until you choose to press send in your email client. At that point your message reaches us by ordinary email, handled by your email provider and ours.</p>' +
+  '<h4>What we hold once you write to us</h4>' +
+  '<ul><li>Your name, email address and anything you choose to include in your message.</li>' +
+  '<li>Held only to answer your enquiry and to carry out any work you engage us for.</li>' +
+  '<li>Retained no longer than needed for that purpose and our legal or tax obligations.</li>' +
+  '<li>Never sold, rented, or shared for anyone else\'s marketing.</li></ul>' +
+  '<h4>Local storage on your device</h4>' +
+  '<p>We store a single flag in your browser\'s session storage so the opening animation plays once per visit rather than every time. It contains no personal data, never leaves your device, and is erased when you close the tab.</p>' +
+  '<h4>Links to other sites</h4>' +
+  '<p>Individual studios are hosted on their own domains, and we link to third-party platforms. Once you leave jvstudios.in, that destination\'s privacy policy governs — not this one.</p>' +
+  '<h4>Your rights under the DPDP Act</h4>' +
+  '<ul><li>Access the personal data we hold about you.</li>' +
+  '<li>Have inaccurate or incomplete data corrected, updated or erased.</li>' +
+  '<li>Nominate another person to exercise these rights should you be unable to.</li>' +
+  '<li>Withdraw consent at any time, as easily as it was given.</li>' +
+  '<li>Raise a grievance with us, and escalate to the Data Protection Board of India if unresolved.</li></ul>' +
+  '<h4>Children</h4>' +
+  '<p>This site is not directed at children, and we do not knowingly process a child\'s personal data. Where any JV Studios education programme involves a minor, verifiable consent is taken from a parent or guardian, separately and in writing, before anything begins.</p>' +
+  '<h4>Grievance contact</h4>' +
+  '<p>Write to <strong>' + LEGAL_EMAIL + '</strong>, addressed to the Grievance Officer, ' + LEGAL_ENTITY + ', ' + LEGAL_ADDRESS + '. We aim to respond within thirty days.</p>' +
+  '<div class="g-updated">' + LEGAL_UPDATED + '</div></div>',
+
+terms:
+  '<div class="g-doc">' + GUIDE_TODO +
+  '<h4>Terms of Use</h4>' +
+  '<p>By using jvstudios.in you accept these terms. If you do not, please do not use the site.</p>' +
+  '<h4>What this website is</h4>' +
+  '<p>An informational portfolio for ' + LEGAL_ENTITY + ', trading as JV Studios, ' + LEGAL_ADDRESS + '. GSTIN: ' + LEGAL_GSTIN + '.</p>' +
+  '<h4>No offer, no contract</h4>' +
+  '<p>Nothing on this site is a binding offer, quotation or professional engagement. Studios marked <em>Coming Soon</em> are in development and are not yet available to commission. A working relationship begins only under a separate written agreement signed by both sides — not by browsing, enquiring, or receiving a reply.</p>' +
+  '<h4>Acceptable use</h4>' +
+  '<ul><li>Do not attempt to breach, probe, overload or disrupt this site or its hosting.</li>' +
+  '<li>Do not scrape, mirror or bulk-download the site or its assets.</li>' +
+  '<li>Do not use JV Studios\' name, marks or work to imply an association that does not exist.</li></ul>' +
+  '<h4>Availability</h4>' +
+  '<p>We do not guarantee uninterrupted access. The site, its content and the studios listed may change or be withdrawn without notice.</p>' +
+  '<h4>Limitation of liability</h4>' +
+  '<p>To the fullest extent Indian law permits, JV Studios is not liable for indirect or consequential loss arising from use of this website. Nothing here limits liability that cannot lawfully be limited.</p>' +
+  '<h4>Governing law</h4>' +
+  '<p>These terms are governed by the laws of India. The courts at <strong>Chikkaballapur, Karnataka</strong> have exclusive jurisdiction.</p>' +
+  '<div class="g-updated">' + LEGAL_UPDATED + '</div></div>',
+
+disclaimer:
+  '<div class="g-doc">' + GUIDE_TODO +
+  '<h4>Disclaimer</h4>' +
+  '<h4>Visualisations are representations</h4>' +
+  '<p>Renders, walkthroughs and concept studies shown or produced by JV Visual Studio are artistic representations for design communication. They are not construction drawings, not structural certification, and not a substitute for a licensed engineer\'s or surveyor\'s approval. Built results vary with site conditions, materials, workmanship and statutory approvals.</p>' +
+  '<h4>Vastu and spatial guidance</h4>' +
+  '<p>Vastu audits and spatial recommendations from JV Antara Studio are offered as traditional design guidance rooted in Bharatiya practice. They are not a warranty of any outcome — financial, medical, or personal — and they never override applicable building codes, municipal bye-laws, or a qualified engineer\'s instruction.</p>' +
+  '<h4>Heritage research</h4>' +
+  '<p>Material from JV Sthapatya Labs is research in progress. Where a claim is not yet verified against a primary source it is labelled as such. Nothing published should be cited as settled historical fact without checking the source we name. Corrections are welcome and will be made openly.</p>' +
+  '<h4>Educational programmes</h4>' +
+  '<p>Programmes under JV Bharat Studio are independent educational products. They are not affiliated with, endorsed by, or examined by any board, university, or examination authority, and no result or admission outcome is promised.</p>' +
+  '<h4>Third-party tools</h4>' +
+  '<p>Where our teaching references external tools, those tools belong to their owners and are governed by their own terms. Naming a tool is not affiliation with, or endorsement by, its maker.</p>' +
+  '<h4>No professional advice</h4>' +
+  '<p>Nothing on this site constitutes legal, financial, medical or engineering advice. Take qualified professional advice before acting on anything you read here.</p>' +
+  '<div class="g-updated">' + LEGAL_UPDATED + '</div></div>',
+
+ip:
+  '<div class="g-doc">' + GUIDE_TODO +
+  '<h4>Intellectual Property &amp; Content</h4>' +
+  '<h4>What we own</h4>' +
+  '<p>The JV Studios name, the JV monogram, the six studio names, all site copy, layouts, renders, films, documents and design systems are the property of ' + LEGAL_ENTITY + ' and are protected under the Copyright Act, 1957 and the Trade Marks Act, 1999.</p>' +
+  '<h4>What you may do</h4>' +
+  '<p>View the site, and share links to it. You may quote briefly with clear attribution to JV Studios and a link back.</p>' +
+  '<h4>What you may not do</h4>' +
+  '<ul><li>Reproduce, resell or redistribute our work, in whole or in part, without written permission.</li>' +
+  '<li>Use our visuals or copy to train a machine-learning model or dataset.</li>' +
+  '<li>Alter or crop our marks, or present our work as your own or a partner\'s.</li></ul>' +
+  '<h4>Client work</h4>' +
+  '<p>Ownership of commissioned work is set by the written agreement for that project. Unless that agreement says otherwise, JV Studios retains the right to show completed work in its portfolio, and retains ownership of unused concepts and working files.</p>' +
+  '<h4>Third-party marks</h4>' +
+  '<p>Client names, platform names and product names appearing on this site belong to their respective owners and are used descriptively only.</p>' +
+  '<h4>Takedown</h4>' +
+  '<p>If you believe something here infringes your rights, write to <strong>' + LEGAL_EMAIL + '</strong> identifying the material and your claim. Genuine complaints are acted on promptly.</p>' +
+  '<div class="g-updated">' + LEGAL_UPDATED + '</div></div>'
+};
+
 </script>
 </body>
 </html>
