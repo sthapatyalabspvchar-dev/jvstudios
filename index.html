@@ -1566,17 +1566,18 @@ function guideLegal(doc, skipNav){
    email client). Do not soften these into boilerplate that
    claims tracking we do not do — accuracy is the protection.
 
-   >>> PLACEHOLDERS BELOW MUST BE FILLED BEFORE PUBLISHING <<<
+   Registered details are taken from the Udyam Registration
+   Certificate. LEGAL_GSTIN stays empty until a GSTIN is issued;
+   the Terms then show it automatically.
    ------------------------------------------------------------ */
-var LEGAL_ENTITY  = '[REGISTERED ENTITY NAME]';
-var LEGAL_GSTIN   = '[GSTIN — IF REGISTERED]';
-var LEGAL_ADDRESS = '4th Cross, Sonneshetthalli, Chintamani, Chikkaballapur, Karnataka 563125, India';
+var LEGAL_ENTITY  = 'Punith Kumar V, sole proprietor of JV Studios';
+var LEGAL_UDYAM   = 'UDYAM-KR-28-0053640';
+var LEGAL_GSTIN   = '';
+var LEGAL_ADDRESS = 'Anantha Nilaya, 4th Cross, Sonneshetthalli, Chintamani, Chikkaballapur District, Karnataka 563125, India';
 var LEGAL_EMAIL   = 'pvchar.jv.designstudio@zohomail.in';
-var LEGAL_UPDATED = 'Last updated · August 2026';
+var LEGAL_UPDATED = 'Last updated · October 2026';
 
-var GUIDE_TODO = '<div class="g-todo"><strong>Before publishing:</strong> replace ' + LEGAL_ENTITY +
-  ' and ' + LEGAL_GSTIN + ' with the real registered details, and have a lawyer read this once. ' +
-  'This draft is accurate to how the site behaves, but it is not legal advice.</div>';
+var GUIDE_TODO = '';
 
 var GUIDE_LEGAL_DOCS = {
 
@@ -1614,7 +1615,9 @@ terms:
   '<h4>Terms of Use</h4>' +
   '<p>By using jvstudios.in you accept these terms. If you do not, please do not use the site.</p>' +
   '<h4>What this website is</h4>' +
-  '<p>An informational portfolio for ' + LEGAL_ENTITY + ', trading as JV Studios, ' + LEGAL_ADDRESS + '. GSTIN: ' + LEGAL_GSTIN + '.</p>' +
+  '<p>An informational portfolio for JV Studios, a sole proprietorship of Punith Kumar V, ' + LEGAL_ADDRESS + '. ' +
+  'Udyam Registration No. ' + LEGAL_UDYAM + ' (Micro enterprise, Ministry of MSME, Government of India).' +
+  (LEGAL_GSTIN ? ' GSTIN: ' + LEGAL_GSTIN + '.' : '') + '</p>' +
   '<h4>No offer, no contract</h4>' +
   '<p>Nothing on this site is a binding offer, quotation or professional engagement. Studios marked <em>Coming Soon</em> are in development and are not yet available to commission. A working relationship begins only under a separate written agreement signed by both sides — not by browsing, enquiring, or receiving a reply.</p>' +
   '<h4>Acceptable use</h4>' +
@@ -1650,7 +1653,7 @@ ip:
   '<div class="g-doc">' + GUIDE_TODO +
   '<h4>Intellectual Property &amp; Content</h4>' +
   '<h4>What we own</h4>' +
-  '<p>The JV Studios name, the JV monogram, the six studio names, all site copy, layouts, renders, films, documents and design systems are the property of ' + LEGAL_ENTITY + ' and are protected under the Copyright Act, 1957 and the Trade Marks Act, 1999.</p>' +
+  '<p>The JV Studios name, the JV monogram, the six studio names, all site copy, layouts, renders, films, documents and design systems are the property of ' + LEGAL_ENTITY + ', and are protected under the Copyright Act, 1957 and the Trade Marks Act, 1999.</p>' +
   '<h4>What you may do</h4>' +
   '<p>View the site, and share links to it. You may quote briefly with clear attribution to JV Studios and a link back.</p>' +
   '<h4>What you may not do</h4>' +
