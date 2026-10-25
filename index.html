@@ -119,6 +119,8 @@ a{color:inherit; text-decoration:none;}
 .stick-col{display:contents;} /* desktop: wrapper is invisible to layout — original stacking order preserved */
 .stick-row{display:contents;} /* desktop: same — mobile media query below makes it a real row */
 .doctrine-head{display:none;} /* mobile-only — shown inside the 880px media query */
+.doctrine-line{display:none; font-family:'Fraunces',serif; font-style:italic; font-weight:400; font-size:.95rem; line-height:1.3; color:var(--gold-deep); margin:0 0 4px; width:100%; letter-spacing:.01em;}
+.doctrine-line-desk{position:fixed; left:50%; bottom:128px; transform:translateX(-50%); z-index:3; width:max-content; max-width:70vw; text-align:center; font-family:'Fraunces',serif; font-style:italic; font-weight:400; font-size:1.05rem; color:var(--gold-deep); letter-spacing:.01em; pointer-events:none; margin:0;}
 .doctrine-seal{display:none;} /* mobile-only — shown inside the 880px media query */
 .sticky{position:relative; border-radius:2px; padding:15px 16px 14px; cursor:default;
   box-shadow:0 10px 22px -14px rgba(46,34,16,.55), 0 2px 5px -3px rgba(46,34,16,.4);
@@ -310,25 +312,30 @@ textarea{min-height:70px; resize:none;}
   .stu-pair{gap:5px;}
   .obj:hover{transform:none;}
   /* compact type scale for the two-column fit — hierarchy now reads via padding + line count, not width */
-  .sticky.lineage{padding:14px 13px 12px;}
-  .sticky.lineage .sq{font-size:.72rem; line-height:1.32;}
-  .sticky.lineage .lin-attr{margin-top:9px; padding-top:8px;}
-  .sticky.lineage .lin-role{font-size:.44rem;}
-  .sticky.lineage .lin-name{font-size:.8rem;}
-  .sticky.lineage .lin-org{font-size:.46rem;}
-  .sticky.passion{padding:12px 12px 10px;}
-  .sticky.passion .sq{font-size:.64rem; line-height:1.28;}
-  .sticky.dharma,.sticky.profession{padding:9px 10px 9px;}
-  .sticky.dharma .sq,.sticky.profession .sq{font-size:.56rem; line-height:1.22;}
-  .sticky .o-kind{font-size:.5rem;}
-  .sticky.lineage .o-kind{font-size:.56rem;}
-  .stu-mini{padding:5px 0 4px;}
-  .stu-mini .stu-name{font-size:.6rem;}
-  .sticky.dharma .stu-name,.sticky.profession .stu-name{font-size:.54rem;}
-  .stu-mini .stu-tag{font-size:.48rem; line-height:1.15; margin-top:2px;}
-  .sticky.dharma .stu-tag,.sticky.profession .stu-tag{font-size:.44rem;}
-  .stu-mini .stu-stat{font-size:.36rem; margin-top:3px;}
-  .stu-mini .stu-explain{font-size:.4rem; margin-top:3px;}
+  .sticky.lineage{padding:19px 16px 16px;}
+  .sticky.lineage .sq{font-size:.84rem; line-height:1.34;}
+  .sticky.lineage .lin-attr{margin-top:12px; padding-top:10px;}
+  .sticky.lineage .lin-role{font-size:.56rem;}
+  .sticky.lineage .lin-name{font-size:.86rem;}
+  .sticky.lineage .lin-org{font-size:.58rem;}
+  .sticky.passion{padding:16px 14px 13px;}
+  .sticky.passion .sq{font-size:.8rem; line-height:1.3;}
+  .sticky.dharma,.sticky.profession{padding:13px 13px 12px;}
+  .sticky.dharma .sq,.sticky.profession .sq{font-size:.72rem; line-height:1.26;}
+  .sticky .o-kind{font-size:.64rem;}
+  .sticky.lineage .o-kind{font-size:.7rem;}
+  .stu-mini{padding:7px 0 6px;}
+  .stu-mini .stu-name{font-size:.76rem;}
+  .sticky.dharma .stu-name,.sticky.profession .stu-name{font-size:.7rem;}
+  .stu-mini .stu-tag{font-size:.62rem; line-height:1.2; margin-top:3px;}
+  .sticky.dharma .stu-tag,.sticky.profession .stu-tag{font-size:.58rem;}
+  .stu-mini .stu-stat{font-size:.5rem; margin-top:4px;}
+  .stu-mini .stu-explain{font-size:.54rem; margin-top:4px;}
+  .doctrine-line{display:block; text-align:center; font-size:1.12rem; line-height:1.28; margin:2px 0 8px; padding:0 6px;}
+  .doctrine-line-desk{display:none;}
+  .stickies.mp-active{height:100%; min-height:100%;}
+  .doctrine-seal{margin-top:auto; padding:18px 0 10px;}
+  .doctrine-seal .lr-ram{font-size:1.1rem;}
   .sticky-seal{margin-top:8px; padding-top:6px; gap:4px;}
   .sticky-seal .lr-lotus svg{width:13px; height:9px;}
   .sticky-seal .lr-ram{font-size:.5rem;}
@@ -834,6 +841,8 @@ textarea{min-height:70px; resize:none;}
     <div class="col col-r">
       <div class="stickies" data-mp="1">
         <div class="doctrine-head">Sheet-02 · The JV Doctrine</div>
+        <p class="doctrine-line">Speak less.<br>Observe sharply.<br>Execute before time.</p>
+        <p class="doctrine-line-desk">Speak less. Observe sharply. Execute before time.</p>
 
         <div class="stick-row">
         <div class="stick-col">
@@ -898,7 +907,7 @@ textarea{min-height:70px; resize:none;}
             <div class="stu-mini" onclick="openStudio(0)" role="button" tabindex="0">
               <div class="stu-name">JV Visual Studio</div>
               <div class="stu-tag">Before the Foundation, Comes the Vision.</div>
-              <span class="stu-stat live">Live</span>
+              <span class="stu-stat soon">Coming Soon</span>
               <span class="stu-explain">Explain →</span>
             </div>
             <div class="stu-mini" onclick="openStudio(2)" role="button" tabindex="0">
@@ -1008,8 +1017,8 @@ var PAD_KIND_DESK="05 · Enquire", PAD_KIND_MOB="SHEET-04 · J V STUDIOS";
 var TITLEBLK_DESK="<span>Master Sheet · 00</span><b>J V Studios</b>", TITLEBLK_MOB="<span>SHEET-01</span>";
 var NOTE_LIVE_MOB="One Legacy. Many Disciplines. One Future.";
 var studios=[
-  {num:"01",name:"JV Visual Studio",disc:"Spatial Visualisation, 3D Renders, Walkthrough Films, Real-Estate Marketing Visuals, Concept Studies",tag:"Before the Foundation, Comes the Vision.",live:true,link:"https://j-v-visual-studio.vercel.app/"},
-  {num:"02",name:"JV Sanchar Studio",disc:"Brand Identity, Websites & Web Apps, Digital Advertising, Social-Media Content, UI / UX Design",tag:"We Connect Your Brand from Chintamani to the World.",live:true,link:"https://jvsanchar.netlify.app/"},
+  {num:"01",name:"JV Visual Studio",disc:"Spatial Visualisation, 3D Renders, Walkthrough Films, Real-Estate Marketing Visuals, Concept Studies",tag:"Before the Foundation, Comes the Vision.",live:false},
+  {num:"02",name:"JV Sanchar Studio",disc:"Brand Identity, Websites & Web Apps, Digital Advertising, Social-Media Content, UI / UX Design",tag:"We Connect Your Brand from Chintamani to the World.",live:true,link:"https://sanchar.jvstudios.in/"},
   {num:"03",name:"JV Antara Studio",disc:"Vastu Audits & Remedies, Interior E-Design, Terrace Garden & Tapovana Plans, Solar & Net-Zero Consulting, Sacred-Geometry Art",tag:"Spaces Aligned to be Smart With Purpose.",live:false},
   {num:"04",name:"JV Bharat Studio",disc:"Live Learning Programmes, AI-in-Education Workshops, Mentorship Cohorts, Granthalaya Library, Gurukula Teaching",tag:"Knowledge. Skills. Transformation.",live:false},
   {num:"05",name:"JV Digital Studio",disc:"Project: Ramarajya Channel, AI Temple Documentaries, Bharatiya History Films, Creator Agency, Original Merchandise",tag:"Broadcasting the Eternal Bharatiya Sanskruti.",live:false},
@@ -1255,7 +1264,7 @@ buildBladeSVG();
 var cG=0,cS=0,cP=0,tT=null;
 function toast(label,msg,href){ var t=document.getElementById('toast'); t.innerHTML='<span class="t-lbl">'+label+'</span><span class="msg">'+msg+'</span><a href="'+href+'" target="_blank" rel="noopener">Open ↗</a>'; t.classList.add('show'); if(tT) clearTimeout(tT); tT=setTimeout(function(){ t.classList.remove('show'); },5200); }
 function eggLegacy(){ if(++cG>=3){cG=0; toast('Gold unlocked · Egg 1 of 3','Every legacy begins as a vision —','https://j-v-visual-studio.vercel.app/'); } }
-function eggVision(){ if(++cS>=3){cS=0; toast('Silver unlocked · Egg 2 of 3','A vision must be heard to be built —','https://jvsanchar.netlify.app/'); } }
+function eggVision(){ if(++cS>=3){cS=0; toast('Silver unlocked · Egg 2 of 3','A vision must be heard to be built —','https://sanchar.jvstudios.in/'); } }
 function eggPranaTattva(){ if(++cP>=5){cP=0; toast('Saffron unlocked · Egg 3 of 3','Knowledge, carried forward —','https://share.google/QpBd8UKYns2oBEBhZ'); } }
 
 
@@ -1468,7 +1477,7 @@ var GUIDE_FAQ = [
   ["Who runs it?",
    "<span style='white-space:nowrap'>Punith Kumar V Char</span> — Founder &amp; Creative Director."],
   ["Which studios can I work with today?",
-   "Two are live: <strong>JV Visual Studio</strong> (visualisation) and <strong>JV Sanchar Studio</strong> (branding &amp; digital). The remaining four are in draft and opening in stages — we would rather open one studio properly than four in name only."],
+   "One is live: <strong>JV Sanchar Studio</strong> (branding &amp; digital). The remaining five are in draft and opening in stages — we would rather open one studio properly than four in name only."],
   ["Do you work with clients outside Chintamani?",
    "Yes. JV Sanchar Studio is open to clients well beyond Chintamani, and visualisation work travels anywhere. The desk stays here; the work does not have to."],
   ["What does a project cost?",
