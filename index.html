@@ -494,6 +494,20 @@ textarea{min-height:70px; resize:none;}
 #guideToken:focus-visible{outline:2px solid var(--saffron); outline-offset:5px;}
 #guideToken.gt-tired .gt-ring{animation:none; opacity:.7; border-color:var(--saffron);}
 #guideToken.gt-hide{opacity:0; pointer-events:none;}
+/* JaiV — the guide mascot (replaces the JV disc) */
+#guideToken .gt-jaiv{position:absolute; left:50%; top:50%; width:80px; height:78px; overflow:visible;
+  transform:translate(-50%,-56%); filter:drop-shadow(0 8px 9px rgba(46,34,16,.32)); animation:gtBob 3.2s ease-in-out infinite;}
+#guideToken .gt-flame{transform-box:view-box; transform-origin:360px 172px; animation:gtFlame .85s ease-in-out infinite alternate;}
+#guideToken .gt-eyes{transform-box:view-box; transform-origin:360px 398px; animation:gtBlink 4.4s infinite;}
+#guideToken .gt-hand{transform-box:view-box; transform-origin:642px 432px; animation:gtWave 5.2s ease-in-out infinite;}
+#guideToken .gt-ring{inset:-6px;}
+#guideToken .gt-tip{bottom:-27px; font-weight:600; letter-spacing:.14em;}
+@keyframes gtBob{0%,100%{transform:translate(-50%,-56%);}50%{transform:translate(-50%,-63%);}}
+@keyframes gtFlame{from{transform:scale(.93,1.05);}to{transform:scale(1.05,.94);}}
+@keyframes gtBlink{0%,91%,97%,100%{transform:scaleY(1);}94%{transform:scaleY(.08);}}
+@keyframes gtWave{0%,62%,100%{transform:translate(0,0);}68%{transform:translate(26px,-150px);}72%{transform:translate(34px,-162px);}76%{transform:translate(24px,-148px);}80%{transform:translate(34px,-162px);}86%{transform:translate(26px,-150px);}92%{transform:translate(0,0);}}
+@media (prefers-reduced-motion: reduce){ #guideToken .gt-jaiv,#guideToken .gt-flame,#guideToken .gt-eyes,#guideToken .gt-hand{animation:none;} }
+
 .gt-tip{
   position:absolute; bottom:-24px; left:50%; transform:translateX(-50%); white-space:nowrap;
   font-family:'Space Grotesk',sans-serif; font-size:.54rem; letter-spacing:.16em;
@@ -975,17 +989,27 @@ textarea{min-height:70px; resize:none;}
 <!-- LOUPE -->
 
 <!-- ============ THE ROAMING GUIDE ============ -->
-<button id="guideToken" class="gt-hide" aria-label="Catch the guide — opens help about JV Studios">
+<button id="guideToken" class="gt-hide" aria-label="Ask JaiV anything — opens questions about JV Studios">
   <span class="gt-ring"></span>
-  <span class="gt-disc"><span class="gt-mark"><span class="j">J</span><span class="v">V</span></span></span>
-  <span class="gt-tip">Catch me</span>
+  <svg class="gt-jaiv" viewBox="0 0 720 700" aria-hidden="true">
+      <g class="gt-flame"><path d="M360,46 C394,96 410,130 405,160 C400,190 320,190 315,160 C310,130 326,96 360,46 Z" fill="#EA8F27"/><path d="M360,108 C377,134 385,150 383,168 C381,184 339,184 337,168 C335,150 343,134 360,108 Z" fill="#FFD67E"/></g>
+      <circle cx="78" cy="432" r="50" fill="#D9AF48" stroke="#14110F" stroke-width="13"/>
+      <g class="gt-hand"><circle cx="642" cy="432" r="50" fill="#D9AF48" stroke="#14110F" stroke-width="13"/></g>
+      <circle cx="360" cy="412" r="232" fill="#DCB34D" stroke="#14110F" stroke-width="16"/>
+      <circle cx="360" cy="412" r="196" fill="#ECD389" stroke="#5A4214" stroke-width="5"/>
+      <ellipse cx="262" cy="292" rx="46" ry="19" fill="#FAF0D2" opacity=".92" transform="rotate(-8 262 292)"/>
+      <ellipse cx="236" cy="462" rx="32" ry="18" fill="#E9A097" opacity=".9"/><ellipse cx="484" cy="462" rx="32" ry="18" fill="#E9A097" opacity=".9"/>
+      <g class="gt-eyes"><ellipse cx="292" cy="398" rx="20" ry="28" fill="#14110F"/><ellipse cx="428" cy="398" rx="20" ry="28" fill="#14110F"/><circle cx="299" cy="386" r="8" fill="#fff"/><circle cx="435" cy="386" r="8" fill="#fff"/></g>
+      <path d="M316,458 Q360,504 404,458" stroke="#14110F" stroke-width="17" fill="none" stroke-linecap="round"/>
+    </svg>
+  <span class="gt-tip">Ask me anything</span>
 </button>
 
 <div id="guidePanel" role="dialog" aria-modal="true" aria-labelledby="gpName" onclick="if(event.target===this)closeGuide()">
   <div class="gp">
     <button class="gp-close" onclick="closeGuide()" aria-label="Close">✕</button>
     <div class="gp-head">
-      <div class="gp-kick">You caught the guide</div>
+      <div class="gp-kick">Ask me anything</div>
       <div class="gp-name" id="gpName">Sūtra <em>— the thread</em></div>
       <p class="gp-sub">The measuring cord a builder snaps before the first stone. Ask, and I will lay the line.</p>
     </div>
@@ -1311,8 +1335,10 @@ function eggPranaTattva(){ if(++cP>=5){cP=0; toast('Saffron unlocked · Egg 3 of
       if(nav) floor = Math.min(floor, nav.getBoundingClientRect().top);
     }
 
-    var x0 = r.left + pad, x1 = r.right - s - pad;
-    var y0 = textBottom + pad, y1 = floor - s - pad;
+    var tip = tok.querySelector('.gt-tip');
+    var side = Math.max(pad, ((tip ? tip.offsetWidth : 110) - s) / 2 + 8);
+    var x0 = r.left + side, x1 = r.right - s - side;
+    var y0 = textBottom + pad + 24, y1 = floor - s - pad - 22;
 
     if(y1 < y0){ y0 = r.top + pad; y1 = Math.max(y0, floor - s - pad); }
     if(x1 < x0) x1 = x0;
