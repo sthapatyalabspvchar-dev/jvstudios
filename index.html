@@ -5,6 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>J V Studios — Where Legacy Meets Vision</title>
 <meta name="description" content="J V Studios is a multidisciplinary creative house from Chintamani — six studios uniting design, technology, heritage and education. Founded by Punith Kumar V Char.">
+<link rel="canonical" href="https://jvstudios.in/">
+<meta name="theme-color" content="#F7F2E7">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="J V Studios">
+<meta property="og:title" content="J V Studios — Where Legacy Meets Vision">
+<meta property="og:description" content="Branding, websites and digital work from Chintamani. Six studios, one creative house. Founded by Punith Kumar V Char.">
+<meta property="og:url" content="https://jvstudios.in/">
+<meta property="og:locale" content="en_IN">
+<meta property="og:image" content="https://jvstudios.in/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="J V Studios, Chintamani — Give your vision a soul. JV Sanchar Studio is open now.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jvstudios.in/og-cover.jpg">
+<meta name="twitter:title" content="J V Studios — Where Legacy Meets Vision">
+<meta name="twitter:description" content="Branding, websites and digital work from Chintamani. Six studios, one creative house.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "J V Studios",
+  "url": "https://jvstudios.in/",
+  "description": "J V Studios is a multidisciplinary creative house from Chintamani — six studios uniting design, technology, heritage and education. Founded by Punith Kumar V Char.",
+  "founder": { "@type": "Person", "name": "Punith Kumar V Char" },
+  "email": "punithkumarv04@gmail.com",
+  "telephone": "+91-93534-95972",
+  "address": { "@type": "PostalAddress", "addressLocality": "Chintamani", "addressCountry": "IN" },
+  "areaServed": "IN",
+  "department": [
+    { "@type": "Organization", "name": "JV Sanchar Studio", "url": "https://sanchar.jvstudios.in/" }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Yatra+One&family=Hind:wght@400;500&display=swap" rel="stylesheet">
@@ -76,9 +109,10 @@ a{color:inherit; text-decoration:none;}
   font-family:'Space Grotesk',sans-serif; font-size:.56rem; letter-spacing:.2em; text-transform:uppercase; color:var(--silver);}
 .master .titleblk b{font-family:'Fraunces',serif; font-size:.92rem; letter-spacing:.02em; color:var(--gold-deep); text-transform:none; font-weight:500;}
 .kicker{font-family:'Space Grotesk',sans-serif; font-size:.64rem; letter-spacing:.28em; text-transform:uppercase; color:var(--silver); margin-bottom:18px; display:flex; align-items:center; gap:11px;}
+.master h1.kicker{padding-right:70px;}
 .kicker::before{content:""; width:24px; height:1px; background:var(--gold);}
 .eyebrow-num{color:var(--gold);}
-.h1{font-size:clamp(1.7rem,3.4vw,3rem); line-height:1.08; font-weight:400; letter-spacing:-.02em;}
+.h1{font-family:'Fraunces',serif; font-size:clamp(1.7rem,3.4vw,3rem); line-height:1.08; font-weight:400; letter-spacing:-.02em;}
 .h1 span{display:block;}
 .hl-2{color:var(--silver); font-style:italic; font-weight:300;}
 .ksaff{color:var(--saffron); cursor:pointer;}
@@ -87,6 +121,24 @@ a{color:inherit; text-decoration:none;}
 .master .sub{margin-top:18px; font-size:.9rem; color:var(--ink-soft); max-width:430px;}
 .master .sub b{color:var(--ink); font-weight:600;}
 .master .soul{margin-top:16px; font-family:'Fraunces',serif; font-style:italic; font-weight:300; font-size:1.2rem; color:var(--saffron);}
+.opennow{margin-top:18px; padding-top:16px; border-top:1px solid var(--rule);}
+.on-kick{display:flex; align-items:center; gap:8px; font-family:'Space Grotesk',sans-serif; font-size:.58rem; letter-spacing:.22em; text-transform:uppercase; color:#1F5E1F; font-weight:600;}
+.on-dot{width:7px; height:7px; border-radius:50%; background:#2E8B2E; box-shadow:0 0 0 3px rgba(46,139,46,.18);}
+.on-name{margin-top:6px; font-family:'Fraunces',serif; font-size:1.25rem; color:var(--ink); line-height:1.2;}
+.on-line{margin-top:4px; font-size:.84rem; color:var(--ink-soft); max-width:430px;}
+.on-acts{display:flex; flex-wrap:wrap; gap:9px; margin-top:12px;}
+.on-btn{display:inline-flex; align-items:center; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--sheet); background:linear-gradient(95deg,var(--gold-deep),var(--gold)); padding:10px 18px; border-radius:2px; border:1px solid var(--gold-deep); transition:transform .2s,box-shadow .2s;}
+.on-btn:hover{transform:translateY(-2px); box-shadow:0 10px 22px -10px rgba(184,137,58,.6);}
+.on-btn.alt{background:none; color:var(--gold-deep); border-color:var(--gold);}
+/* desktop: the hero stays as it was; the open studio sits on the Enquire pad instead */
+@media(min-width:881px){ .master .opennow{display:none;} }
+.pad-open{margin-top:18px; padding-top:14px; border-top:1px solid var(--rule); cursor:default;}
+.pad-open .on-name{font-size:1.02rem; margin-top:4px;}
+.pad-open .on-line{font-size:.74rem; margin-top:3px;}
+.pad-open .on-acts{flex-direction:column; align-items:stretch; gap:7px; margin-top:10px;}
+.pad-open .on-btn{justify-content:center; font-size:.62rem; padding:9px 12px;}
+@media(max-width:880px){ .pad-open{display:none;} }
 /* J V stamp */
 .stamp{position:absolute; top:20px; right:22px; width:74px; height:74px; border-radius:50%; border:1.5px solid var(--gold);
   display:flex; flex-direction:column; align-items:center; justify-content:center; transform:rotate(8deg); opacity:.92;
@@ -152,6 +204,7 @@ a{color:inherit; text-decoration:none;}
 .stu-pair{display:flex; flex-direction:column; margin-top:11px;}
 .stu-mini{padding:8px 0 7px; cursor:pointer;}
 .stu-mini + .stu-mini{border-top:1px solid rgba(26,23,20,.18);}
+.stu-mini.stu-live{background:rgba(255,255,255,.42); margin:4px -8px 0; padding:8px 8px 7px; border-radius:2px; border-top:none; box-shadow:0 0 0 1px rgba(31,94,31,.28);}
 .stu-mini .stu-name{font-family:'Fraunces',serif; font-size:.74rem; line-height:1.15; color:var(--ink); transition:opacity .2s;}
 .stu-mini:hover .stu-name{opacity:.68;}
 .stu-mini .stu-tag{font-size:.6rem; line-height:1.28; color:rgba(26,23,20,.7); margin-top:4px;}
@@ -172,6 +225,9 @@ a{color:inherit; text-decoration:none;}
 .fb-text{font-family:'Space Grotesk',sans-serif; font-size:.56rem; letter-spacing:.06em; color:var(--silver); line-height:1.55;}
 .fb-text .k{letter-spacing:.16em; text-transform:uppercase; color:var(--gold-deep);}
 .fb-text .cg{display:block; font-family:'Fraunces',serif; font-style:italic; font-size:.74rem; color:var(--ink-soft); letter-spacing:0; margin-top:2px;}
+.fb-contact{display:block; margin-top:5px; text-transform:none; letter-spacing:.04em;}
+.fb-contact a{white-space:nowrap; color:var(--gold-deep); border-bottom:1px solid rgba(138,101,38,.35);}
+.fb-contact a:hover{color:var(--ink);}
 .fb-loc{font-family:'Space Grotesk',sans-serif; font-size:.54rem; letter-spacing:.1em; text-transform:uppercase; color:var(--silver); text-align:right; line-height:1.6;}
 
 /* the seal (lotus + RAM) — ORIGINAL colours kept exactly */
@@ -210,6 +266,9 @@ a{color:inherit; text-decoration:none;}
 .lp-link{margin-top:24px; display:inline-flex; align-items:center; gap:9px; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase;
   color:var(--sheet); background:linear-gradient(95deg,var(--gold-deep),var(--gold)); padding:13px 26px; border-radius:2px; transition:transform .2s,box-shadow .2s;}
 .lp-link:hover{transform:translateY(-2px); box-shadow:0 12px 26px -10px rgba(184,137,58,.6);}
+.lp-acts{display:flex; flex-wrap:wrap; gap:10px; margin-top:24px;}
+.lp-acts .lp-link{margin-top:0;}
+.lp-link.lp-link-alt{background:none; color:var(--gold-deep); border:1px solid var(--gold);}
 .lp-soon{margin-top:24px; font-family:'Space Grotesk',sans-serif; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--silver);}
 
 /* loupe: doctrine */
@@ -250,6 +309,11 @@ textarea{min-height:70px; resize:none;}
 .send{margin-top:16px; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sheet);
   background:linear-gradient(95deg,var(--gold-deep),var(--gold),var(--gold-deep)); border:none; border-radius:2px; padding:13px 32px; cursor:pointer; transition:transform .2s,box-shadow .2s;}
 .send:hover{transform:translateY(-2px); box-shadow:0 12px 26px -10px rgba(184,137,58,.6);}
+.send-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px;}
+.send-row .send{margin-top:0;}
+.send.alt{background:none; color:var(--gold-deep); border:1px solid var(--gold);}
+.send-note{margin-top:12px; font-size:.76rem; color:var(--ink-soft);}
+.send-note a{color:var(--gold-deep); border-bottom:1px solid rgba(138,101,38,.35); white-space:nowrap;}
 
 /* hint + toast */
 .hint{position:fixed; left:50%; bottom:84px; transform:translateX(-50%); z-index:55; font-family:'Space Grotesk',sans-serif; font-size:.56rem; letter-spacing:.2em; text-transform:uppercase; color:var(--silver-dim); pointer-events:none; transition:opacity .6s;}
@@ -367,9 +431,15 @@ textarea{min-height:70px; resize:none;}
   .fb-left{flex-direction:column; gap:6px; text-align:center;}
   .fb-text{text-align:center;}
   .fb-loc{text-align:center; order:4;}
+  .fb-contact .fb-sep{display:none;} .fb-contact a{display:block; width:max-content; margin:3px auto 0;}
   .seal{order:3;}
 
   .doctrine-brief-mobile{display:block;}
+  .master.mp-active{display:flex; flex-direction:column;}
+  .master .titleblk{order:1;} .master .kicker{order:2;} .master .h1{order:3;} .master .opennow{order:4; margin-top:16px; padding-top:13px;} .master .sub{order:5;} .master .soul{order:6;}
+  .on-name{font-size:1.1rem; margin-top:4px;} .on-line{font-size:.8rem; line-height:1.45;}
+  .on-acts{gap:7px; margin-top:10px;} .on-btn{font-size:.6rem; letter-spacing:.07em; padding:9px 11px;}
+  .master h1.kicker{padding-right:0; letter-spacing:.18em; line-height:1.6;}
   .mp-tap{font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold-deep); font-weight:600;}
 
   /* gold page-nav arrows */
@@ -611,7 +681,7 @@ textarea{min-height:70px; resize:none;}
         <path class="jv3-path" d="M 30 20 H 60 V 65 L 45 80 H 30 L 45 65 V 35 H 30 Z" />
       </g>
     </svg>
-    <h1 class="jv3-reveal jv3-studios">STUDIOS</h1>
+    <div class="jv3-reveal jv3-studios">STUDIOS</div>
     <div class="jv3-reveal jv3-yearrow">
       <div class="jv3-rule"></div>
       <span class="jv3-year">2025</span>
@@ -825,6 +895,15 @@ textarea{min-height:70px; resize:none;}
         <div class="o-kind" id="padKind">05 · Enquire</div>
         <div class="o-title">Tell us what you are building.</div>
         <div class="o-tease">We will write back from Chintamani.</div>
+        <div class="pad-open" onclick="event.stopPropagation()">
+          <p class="on-kick"><span class="on-dot"></span>Open now</p>
+          <p class="on-name">JV Sanchar Studio</p>
+          <p class="on-line">Brand identity, websites, social-media content and digital ads.</p>
+          <div class="on-acts">
+            <a class="on-btn" href="https://sanchar.jvstudios.in/" target="_blank" rel="noopener">See the studio ↗</a>
+            <a class="on-btn alt" href="https://wa.me/919353495972?text=Hello%20J%20V%20Studios%2C%20I%27d%20like%20to%20talk%20to%20JV%20Sanchar%20Studio%20about%20my%20brand." target="_blank" rel="noopener">WhatsApp us</a>
+          </div>
+        </div>
         <span class="o-open mp-tap">↗</span>
       </div>
     </div>
@@ -839,14 +918,23 @@ textarea{min-height:70px; resize:none;}
           <div class="vr-blade" id="vrBlade"></div>
         </div>
         <div class="titleblk" id="titleblk"><span>Master Sheet · 00</span><b>J V Studios</b></div>
-        <p class="kicker"><span class="eyebrow-num" id="heroEyebrow">00</span> · Continuing a Builder's Legacy.</p>
-        <h1 class="h1">
+        <h1 class="kicker"><span class="eyebrow-num" id="heroEyebrow">00</span> · J V Studios · Branding, websites &amp; digital · Chintamani</h1>
+        <p class="h1">
           <span><span id="eggGold" class="ksaff" role="button" tabindex="0" onclick="eggLegacy()">JayaLakshmi Constructions</span></span>
           <span class="hl-2">Now Reimagined for</span>
           <span><span id="eggSilver" class="kblue" role="button" tabindex="0" onclick="eggVision()">AI Generation</span></span>
-        </h1>
-        <p class="sub">Your creative house for purpose-driven work rooted in Bharatiya wisdom. Six specialised studios — spanning <b>visualisation, branding, spatial design, <span id="eggPrana" class="eggword" role="button" tabindex="0" onclick="eggPranaTattva()">education</span>, broadcasting and heritage research</b> — working as one, from the first sketch to the lasting story.</p>
+        </p>
+        <p class="sub">Your creative house for purpose-driven work rooted in Bharatiya wisdom. Six specialised studios — spanning <b>visualisation, branding, spatial design, <span id="eggPrana" class="eggword" role="button" tabindex="0" onclick="eggPranaTattva()">education</span>, broadcasting and heritage research</b> — opening one at a time, so each opens properly.</p>
         <p class="soul">Give your vision a soul.</p>
+        <div class="opennow">
+          <p class="on-kick"><span class="on-dot"></span>Open now</p>
+          <p class="on-name">JV Sanchar Studio</p>
+          <p class="on-line">Brand identity, websites, social-media content and digital ads — for businesses in Chintamani and beyond.</p>
+          <div class="on-acts">
+            <a class="on-btn" href="https://sanchar.jvstudios.in/" target="_blank" rel="noopener">See the studio ↗</a>
+            <a class="on-btn alt" href="https://wa.me/919353495972?text=Hello%20J%20V%20Studios%2C%20I%27d%20like%20to%20talk%20to%20JV%20Sanchar%20Studio%20about%20my%20brand." target="_blank" rel="noopener">WhatsApp us</a>
+          </div>
+        </div>
         <div class="stamp"><span class="jv"><span class="j">J</span><span class="v">V</span></span><span class="w">STUDIOS</span></div>
       </div>
     </div>
@@ -904,10 +992,10 @@ textarea{min-height:70px; resize:none;}
               <span class="stu-stat soon">Coming Soon</span>
               <span class="stu-explain">Explain →</span>
             </div>
-            <div class="stu-mini" onclick="openStudio(1)" role="button" tabindex="0">
+            <div class="stu-mini stu-live" onclick="openStudio(1)" role="button" tabindex="0">
               <div class="stu-name">JV Sanchar Studio</div>
               <div class="stu-tag">We Connect Your Brand from Chintamani to the World.</div>
-              <span class="stu-stat live">Live</span>
+              <span class="stu-stat live">Open now</span>
               <span class="stu-explain">Explain →</span>
             </div>
           </div>
@@ -979,7 +1067,7 @@ textarea{min-height:70px; resize:none;}
         <span class="lr-ram" id="ramWord">RAM</span>
         <span class="lr-lotus" style="animation-delay:1s"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 72" width="24" height="17"><path d="M50,65 C28,52 6,46 3,22 C19,32 37,44 50,65Z" fill="#C82000"/><path d="M50,65 C72,52 94,46 97,22 C81,32 63,44 50,65Z" fill="#C82000"/><path d="M50,65 C18,56 1,58 0,34 C14,42 35,52 50,65Z" fill="#A01800"/><path d="M50,65 C82,56 99,58 100,34 C86,42 65,52 50,65Z" fill="#A01800"/><path d="M50,65 C22,42 16,16 28,4 C34,18 42,38 50,65Z" fill="#D43010"/><path d="M50,65 C78,42 84,16 72,4 C66,18 58,38 50,65Z" fill="#D43010"/><path d="M50,65 C41,32 40,8 50,0 C60,8 59,32 50,65Z" fill="#E04818"/><path d="M50,62 C43,36 43,14 50,8 C57,14 57,36 50,62Z" fill="#F08428"/><ellipse cx="50" cy="40" rx="10" ry="15" fill="#C88010"/><ellipse cx="50" cy="40" rx="6.5" ry="10" fill="#E8A020"/><ellipse cx="50" cy="38" rx="3.5" ry="5.5" fill="#FFD040"/></svg></span>
       </div>
-      <div class="fb-loc">Based in Chintamani<br>Serving Bharat &amp; the World</div>
+      <div class="fb-loc">Based in Chintamani<br>Serving Bharat &amp; the World<span class="fb-contact"><a href="https://wa.me/919353495972?text=Hello%20J%20V%20Studios%2C%20I%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener">WhatsApp +91 93534 95972</a><span class="fb-sep"> · </span><a href="mailto:punithkumarv04@gmail.com">punithkumarv04@gmail.com</a></span></div>
     </div>
   </footer>
 </div>
@@ -1054,7 +1142,7 @@ var voices=[
   {heading:"Dharma",saff:true,q:"\u201CKnowledge. Skills. Transformation. Rooted in Dharma. Designed for Bharat.\u201D",from:"Studio 04",who:"JV Bharat Studio"},
   {heading:"Profession",saff:false,q:"\u201CBefore the foundation, comes the vision.\u201D",from:"Studio 01",who:"JV Visual Studio"}
 ];
-var chipNames=["JV Visual Studio","JV Sanchar Studio","JV Antara Studio","JV Bharat Studio","JV Digital Studio","JV Sthapatya Labs","Not sure yet"];
+var chipNames=["JV Sanchar Studio","JV Visual Studio","JV Antara Studio","JV Bharat Studio","JV Digital Studio","JV Sthapatya Labs","Not sure yet"];
 
 /* ---------- loupe ---------- */
 var lp=document.getElementById('loupe'), lpBody=document.getElementById('lpBody');
@@ -1065,11 +1153,12 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeLoupe
 function openStudio(i){
   var s=studios[i];
   var act=s.live
-    ? '<a class="lp-link" href="'+s.link+'" target="_blank" rel="noopener">Open studio ↗</a>'
+    ? '<div class="lp-acts"><a class="lp-link" href="'+s.link+'" target="_blank" rel="noopener">Open studio ↗</a>'+
+      '<a class="lp-link lp-link-alt" href="https://wa.me/919353495972?text='+encodeURIComponent('Hello J V Studios, I\'d like to talk to '+s.name+' about my project.')+'" target="_blank" rel="noopener">WhatsApp us</a></div>'
     : '<div class="lp-soon">In draft · opening soon</div>';
   showLoupe(
     '<p class="label">JV Studios · Drawing '+s.num+'</p>'+
-    '<div class="lp-st-top"><span class="lp-st-num">'+s.num+'</span><span class="lp-st-stat '+(s.live?'live':'soon')+'">'+(s.live?'Live':'Coming Soon')+'</span></div>'+
+    '<div class="lp-st-top"><span class="lp-st-num">'+s.num+'</span><span class="lp-st-stat '+(s.live?'live':'soon')+'">'+(s.live?'Open now':'Coming Soon')+'</span></div>'+
     '<h2>'+s.name+'</h2>'+
     '<p class="lp-disc">'+s.disc+'</p>'+
     '<p class="lp-tag">'+s.tag+'</p>'+act
@@ -1117,7 +1206,7 @@ function openLegacy(){
     '<p class="label">04 · Legacy</p><h2>Continuing a Builder\u2019s <span class="ag">Legacy.</span></h2>'+
     '<div class="lin-grid">'+
       '<div class="lin-card"><h3>The House</h3><p>J V Studios is a multidisciplinary creative house from <span class="wh">Chintamani</span> — six studios spanning visualisation, technology, intelligent spatial design, education, broadcasting and heritage research.</p></div>'+
-      '<div class="lin-card"><h3>The Name</h3><p><span class="wh">J</span> honours My grandmother — the root from which knowledge grows. <span class="wh">V</span> honours the father, Venu Gopalachar S, a civil engineer who built over a hundred homes. Together, <span class="wh" style="white-space:nowrap">J V</span> carries a builder\u2019s legacy forward.</p></div>'+
+      '<div class="lin-card"><h3>The Name</h3><p><span class="wh">J</span> honours the founder\u2019s grandmother — the root from which knowledge grows. <span class="wh">V</span> honours the father, Venu Gopalachar S, a civil engineer who built over a hundred homes. Together, <span class="wh" style="white-space:nowrap">J V</span> carries a builder\u2019s legacy forward.</p></div>'+
       '<div class="lin-card"><h3>The Founder</h3><p><span class="wh" style="white-space:nowrap">Punith Kumar V Char</span><span class="role">Founder &amp; Creative Director<br><span class="neon-saff">JV Studios</span></span></p></div>'+
     '</div>'
   );
@@ -1139,7 +1228,9 @@ function openEnquire(){
       '<div class="erow"><div><label for="q-name">Your Name</label><input id="q-name" type="text" placeholder="Full name"></div>'+
       '<div><label for="q-email">Email</label><input id="q-email" type="email" placeholder="you@example.com"></div></div>'+
       '<div><label for="q-msg">Your Message</label><textarea id="q-msg" placeholder="A line or two about your project…"></textarea></div>'+
-      '<button class="send" onclick="sendEnquiry()">Send Enquiry</button>'+
+      '<div class="send-row"><button class="send" type="button" onclick="sendEnquiryWA()">Send on WhatsApp</button>'+
+      '<button class="send alt" type="button" onclick="sendEnquiry()">Send by email</button></div>'+
+      '<p class="send-note">Or write to us directly: <a href="https://wa.me/919353495972" target="_blank" rel="noopener">WhatsApp +91 93534 95972</a> · <a href="mailto:punithkumarv04@gmail.com">punithkumarv04@gmail.com</a></p>'+
     '</div></div>'
   );
   picked=[];
@@ -1148,7 +1239,15 @@ function openEnquire(){
 function sendEnquiry(){
   var n=(document.getElementById('q-name')||{}).value||'', e=(document.getElementById('q-email')||{}).value||'', m=(document.getElementById('q-msg')||{}).value||'';
   var st=picked.length?picked.join(', '):'General enquiry';
-  window.location.href='mailto:pv.char.jvbharathstudio@zohomail.in?subject='+encodeURIComponent('Enquiry — '+st)+'&body='+encodeURIComponent('Name: '+n.trim()+'\nEmail: '+e.trim()+'\nStudios: '+st+'\n\n'+m.trim());
+  window.location.href='mailto:punithkumarv04@gmail.com?subject='+encodeURIComponent('Enquiry — '+st)+'&body='+encodeURIComponent('Name: '+n.trim()+'\nEmail: '+e.trim()+'\nStudios: '+st+'\n\n'+m.trim());
+}
+
+function sendEnquiryWA(){
+  var n=(document.getElementById('q-name')||{}).value||'', e=(document.getElementById('q-email')||{}).value||'', m=(document.getElementById('q-msg')||{}).value||'';
+  var st=picked.length?picked.join(', '):'General enquiry';
+  var t='Hello J V Studios,\n\nName: '+n.trim()+(e.trim()?'\nEmail: '+e.trim():'')+'\nStudios: '+st+'\n\n'+m.trim();
+  var url='https://wa.me/919353495972?text='+encodeURIComponent(t);
+  var w=window.open(url,'_blank'); if(w){ try{ w.opener=null; }catch(_){} } else { window.location.href=url; }
 }
 
 function openLoupe(kind){ if(kind==='doctrine') openDoctrine(); else if(kind==='legacy') openLegacy(); else if(kind==='enquire') openEnquire(); }
@@ -1515,7 +1614,7 @@ var GUIDE_FAQ = [
   ["Do you use AI in your work?",
    "Yes, deliberately and openly — it is in the studio's own line, <em>now reimagined for the AI generation</em>. AI is a tool in the hand; the judgement, the doctrine and the final call stay human."],
   ["How do I start a conversation?",
-   "Open the enquiry sheet and tell us what you are building. It opens your own email app with the message ready — nothing is stored on this site. We write back from Chintamani."]
+   "Open the enquiry sheet and tell us what you are building, then send it on WhatsApp or by email. Either way it opens your own app with the message ready — nothing is stored on this site. You can also WhatsApp us directly on <span style='white-space:nowrap'>+91 93534 95972</span>. We write back from Chintamani."]
 ];
 
 var GUIDE_LEGAL_DOC = 'privacy';
@@ -1574,8 +1673,8 @@ var LEGAL_ENTITY  = 'Punith Kumar V, sole proprietor of JV Studios';
 var LEGAL_UDYAM   = 'UDYAM-KR-28-0053640';
 var LEGAL_GSTIN   = '';
 var LEGAL_ADDRESS = 'Chintamani';
-var LEGAL_EMAIL   = 'pvchar.jv.designstudio@zohomail.in';
-var LEGAL_UPDATED = 'Last updated · October 2026';
+var LEGAL_EMAIL   = 'punithkumarv04@gmail.com';
+var LEGAL_UPDATED = 'Last updated · November 2026';
 
 var GUIDE_TODO = '';
 
@@ -1588,9 +1687,9 @@ privacy:
   '<h4>What this website collects</h4>' +
   '<p><strong>Nothing.</strong> This site has no analytics, no advertising pixels, no tracking cookies and no server-side database. We do not profile visitors and we do not build audiences from your visit.</p>' +
   '<h4>The enquiry sheet</h4>' +
-  '<p>The enquiry sheet does not transmit anything to us directly. It composes a message and opens it in <em>your own email application</em>. Nothing you type is stored on this website or sent anywhere until you choose to press send in your email client. At that point your message reaches us by ordinary email, handled by your email provider and ours.</p>' +
+  '<p>The enquiry sheet does not transmit anything to us directly. It composes a message and opens it in <em>your own WhatsApp or email application</em>, whichever you choose. Nothing you type is stored on this website or sent anywhere until you choose to press send in that app. At that point your message reaches us by WhatsApp, which is governed by WhatsApp\'s own terms and privacy policy, or by ordinary email, handled by your email provider and ours.</p>' +
   '<h4>What we hold once you write to us</h4>' +
-  '<ul><li>Your name, email address and anything you choose to include in your message.</li>' +
+  '<ul><li>Your name, your email address or phone number, and anything you choose to include in your message.</li>' +
   '<li>Held only to answer your enquiry and to carry out any work you engage us for.</li>' +
   '<li>Retained no longer than needed for that purpose and our legal or tax obligations.</li>' +
   '<li>Never sold, rented, or shared for anyone else\'s marketing.</li></ul>' +
